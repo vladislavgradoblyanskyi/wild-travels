@@ -5,6 +5,7 @@ import {
   LoginRequest,
   RegisterRequest,
 } from '@/types/auth';
+import { type TravellersResponse } from '@/types/traveller';
 
 export function getMe() {}
 export const checkSession = async () => {
@@ -65,3 +66,15 @@ export async function userRegister(data: RegisterRequest) {
 export const logout = async (): Promise<void> => {
   await nextServer.post('/api/auth/logout');
 };
+
+export async function getTravellers(page: number): Promise<TravellersResponse> {
+  try {
+    const response = await nextServer.get<TravellersResponse>(`/api/travellers?page=${page}&perPage=12`);
+    return response.data;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error('Щось пішло не так при отриманні даних про мандрівників');
+  }
+}

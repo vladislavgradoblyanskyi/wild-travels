@@ -1,0 +1,102 @@
+.travellerCard {
+    border-radius: 12px;
+    padding: 24px;
+    width: 335px;
+    height: 317px;
+    background: var(--color-scheme-2-foreground);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    color: var(--color-scheme-2-text);
+    font-family: var(--font-family);
+    line-height: 150%;
+
+    max-width: 100%;
+
+    flex: 0 0 auto;
+}
+
+.travellerAvatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    align-self: center;
+}
+
+.travellerName {
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: 24px;
+}
+
+.travellerArticles {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.travellerButton {
+    border: 1px solid var(--color-scheme-2-border);
+    border-radius: 6px;
+    padding: 6px 12px;
+    width: 100%;
+    height: 100%;
+    background: var(--opacity-neutral-darkest-5);
+
+    margin-top: 16px;
+
+    color: var(--color-scheme-2-text);
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+
+    transition: all 0.3s ease, color 0.3s ease;
+}
+
+.travellerButton:hover,
+.travellerButton:focus {
+    background: var(--color-mantis-dark);
+    border: 1px solid var(--opacity-transparent);
+    color: var(--color-white);
+}
+
+.travellerButton:active {
+    background: var(--color-mantis-darker);
+    border: 1px solid var(--opacity-transparent);
+    color: var(--color-white);
+}
+
+@media (min-width: 375px) {
+    .travellerCard {
+        max-width: 375px;
+    }
+
+    .travellerButton {
+        max-width: 375px;
+    }
+}
+
+@media (min-width: 768px) {
+    .travellerCard {
+        max-width: 218px;
+    }
+
+    .travellerButton {
+        width: 170px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .travellerCard {
+        max-width: 310px;
+        height: 335px;
+    }
+
+    .travellerButton {
+        width: 262px;
+        height: 48px;
+    }
+}
