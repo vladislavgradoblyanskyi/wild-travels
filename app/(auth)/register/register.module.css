@@ -1,5 +1,4 @@
 .navigationHome {
-  width: 124px;
   font-weight: 500;
   font-size: 17px;
   padding: 18px 0;
@@ -8,8 +7,12 @@
 .homeLink {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 4px;
+}
+
+.span {
+  width: 124px;
 }
 .navigation {
   padding-top: 64px;
