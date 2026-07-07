@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
-import  css from'./globals.css';
+import './globals.css';
 import QueryProvider from '@/components/providers/QueryProvider';
 import AppLayout from '@/components/layout/AppLayout/AppLayout';
 import AuthProvider from '@/components/providers/AuthProvider';

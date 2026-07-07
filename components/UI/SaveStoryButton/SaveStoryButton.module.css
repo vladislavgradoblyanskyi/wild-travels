@@ -1,0 +1,29 @@
+.savedIcon {
+  background: var(--color-mantis-darker);
+  color: var(--color-white);
+  border-color: var(--opacity-transparent);
+}
+
+.savedIcon svg {
+  fill: var(--color-white);
+  color: var(--color-white);
+}
+
+.loadingIcon {
+  animation: penPulse 0.8s ease-in-out infinite;
+}
+
+@keyframes penPulse {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2) rotate(-10deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.8;
+  }
+}

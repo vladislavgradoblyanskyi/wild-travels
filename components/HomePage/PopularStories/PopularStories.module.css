@@ -6,8 +6,8 @@
 
 .header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 16px;
   margin-bottom: 24px;
 }
@@ -18,124 +18,31 @@
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: -0.02em;
+  margin: 0;
 }
 
 .allLink {
   display: none;
-  cursor: pointer;
+}
+
+.allLinkMobile {
+  width: 100%;
+  justify-content: center;
 }
 
 .sliderWrap {
   width: 100%;
   overflow: hidden;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .slide {
   height: auto;
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-width: 0;
-  height: 100%;
-  border-radius: 12px;
-  background-color: var(--color-mantis-lighter);
-  overflow: hidden;
-}
-
-.imageWrap {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  background-color: var(--color-neutral-lightest);
-}
-
-.image {
+.cardWrap {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-}
-
-.metaRow {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 12px 12px 0;
-  color: var(--text-on-scheme-2-primary);
-  font-size: 12px;
-  line-height: 1.2;
-}
-
-.author,
-.saved,
-.metaDot,
-.bookmarkIcon {
-  flex-shrink: 0;
-}
-
-.cardTitle {
-  padding: 12px 12px 0;
-  color: var(--text-on-scheme-2-primary);
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.3;
-  word-break: break-word;
-}
-
-.actionsRow {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: auto;
-  padding: 16px 12px 12px;
-}
-
-.readMore {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  min-height: 40px;
-  padding: 10px 14px;
-  border: 1px solid var(--color-scheme-2-border);
-  border-radius: 8px;
-  background-color: var(--opacity-neutral-darkest-5);
-  color: var(--text-on-scheme-2-primary);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.2;
-  transition:
-    background-color var(--transition-default),
-    border-color var(--transition-default),
-    opacity var(--transition-default);
-}
-
-.iconButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  min-width: 40px;
-  height: 40px;
-  border: 1px solid var(--color-scheme-2-border);
-  border-radius: 8px;
-  background-color: var(--opacity-neutral-darkest-5);
-  color: var(--text-on-scheme-2-primary);
-  transition:
-    background-color var(--transition-default),
-    border-color var(--transition-default),
-    opacity var(--transition-default);
-}
-
-.readMore:hover,
-.readMore:focus-visible,
-.iconButton:hover,
-.iconButton:focus-visible {
-  background-color: var(--active-bg);
-  border-color: var(--opacity-neutral-darkest-20);
 }
 
 .controlsRow {
@@ -161,11 +68,11 @@
   border-radius: 8px;
   background-color: var(--color-scheme-2-background);
   color: var(--text-on-scheme-2-primary);
+  cursor: pointer;
   transition:
     background-color var(--transition-default),
     border-color var(--transition-default),
     opacity var(--transition-default);
-  cursor: pointer;
 }
 
 .navBtn:hover,
@@ -180,29 +87,8 @@
 }
 
 .allLinkMobile {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-  min-height: 40px;
-  padding: 10px 16px;
-  border-radius: 8px;
-  background-color: var(--color-mantis);
-  color: var(--color-white);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.2;
-  transition:
-    background-color var(--transition-default),
-    opacity var(--transition-default);
-  cursor: pointer;
-}
-
-.allLink:hover,
-.allLink:focus-visible,
-.allLinkMobile:hover,
-.allLinkMobile:focus-visible {
-  background-color: var(--color-mantis-dark);
+  justify-content: center;
 }
 
 .message {
@@ -237,29 +123,25 @@
   }
 
   .header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
     margin-bottom: 32px;
   }
 
   .title {
     font-size: 48px;
     line-height: 1.06;
+    flex: 1;
+    min-width: 0;
   }
 
   .allLink {
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 40px;
-    padding: 10px 16px;
-    border-radius: 8px;
-    background-color: var(--color-mantis);
-    color: var(--color-white);
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.2;
-    transition:
-      background-color var(--transition-default),
-      opacity var(--transition-default);
+    width: auto;
+    flex-shrink: 0;
+    white-space: nowrap;
   }
 
   .controlsRow {
@@ -270,10 +152,6 @@
 
   .allLinkMobile {
     display: none;
-  }
-
-  .cardTitle {
-    font-size: 20px;
   }
 }
 
