@@ -1,0 +1,128 @@
+.h3 {
+  font-weight: 700;
+  font-size: 28px;
+  margin-top: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+  margin-bottom: 24px;
+}
+@media only screen and (min-width: 768px) {
+  .h3 {
+    font-size: 44px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .h2 {
+    font-size: 52px;
+  }
+}
+.p {
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  margin-left: 50px;
+
+  margin-right: 50px;
+}
+@media only screen and (min-width: 1440px) {
+  .p {
+    font-size: 20px;
+  }
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 53px;
+  padding-top: 32px;
+  max-width: 644px;
+  margin: 0 auto;
+}
+.label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+@media only screen and (min-width: 1440px) {
+  .label {
+    font-size: 18px;
+  }
+}
+
+.input {
+  padding: 8px;
+  margin-bottom: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #1b391b;
+  outline: none;
+}
+.input:focus {
+  border: 1px solid #5dbe5c;
+  border-radius: 6px;
+}
+input:hover {
+  border: 1px solid #5dbe5c;
+  border-radius: 6px;
+}
+.input:placeholder-shown {
+  font-size: 18px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.error {
+  min-height: 18px;
+  font-size: 14px;
+  color: red;
+  margin-bottom: 10px;
+}
+
+.errorInput {
+  border-color: red;
+}
+
+.button {
+  margin: 0 auto;
+  border: 1px solid #4a9849;
+  border-radius: 6px;
+  padding: 6px 12px;
+
+  width: 100%;
+  height: 44px;
+  outline: none;
+  background: #4a9849;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #fff;
+  cursor: pointer;
+}
+@media only screen and (min-width: 1440px) {
+  .button {
+    font-size: 20px;
+  }
+}
+.button:focus,
+.button:hover {
+  background: #def2de;
+  color: #1b391b;
+}
+.button:active {
+  background: #254c24;
+  color: #fff;
+}
+.button:disabled {
+  cursor: not-allowed;
+  background: #4a9849;
+  opacity: 0.3;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}

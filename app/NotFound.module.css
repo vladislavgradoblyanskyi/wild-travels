@@ -1,62 +1,33 @@
-.main {
-  flex: 1;
-}
-
-.container {
-  width: 90%;
-  max-width: 1280px;
-  margin: 0px auto;
-  padding: 0 16px 16px;
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-top: 100px;
+  background: #def2de;
+  border-radius: 8px;
+  padding: 20px 15px;
+  gap: 20px;
 }
 
 .title {
-  font-size: 36px;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 60px;
-  text-align: center;
+  font-size: 30px;
+  font-weight: 500;
 }
-
 .description {
-  font-size: 18px;
-  color: #444444;
-  line-height: 28px;
-  margin-bottom: 16px;
+  font-weight: 500;
 }
-
 .link {
-  display: flex;
-  justify-content: center;
-  padding: 6px 12px;
-  font-size: 16px;
-  color: whitesmoke;
-  background-color: #0d6efd;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  max-width: 120px;
-  margin: 0 auto;
+  padding: 10px 15px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.05);
+  font-weight: 500;
+  border-radius: 8px;
 }
-
-.desc {
-  text-align: center;
-  font-size: 18px;
-  color: #444444;
-  line-height: 28px;
-  margin-bottom: 16px;
-
-  margin-bottom: 20px;
-}
-
-.countdown {
-  margin-top: 16px;
-  font-size: 14px;
-  color: #6b7280;
-  text-align: center;
-}
-
-.countdown strong {
-  color: #111827;
-  font-variant-numeric: tabular-nums;
+.link:hover,
+.link:focus {
+  background: #4a9849;
+  color: #fff;
+  border: 1px solid #4a9849;
 }

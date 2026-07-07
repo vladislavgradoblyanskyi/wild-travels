@@ -1,0 +1,16 @@
+.navigationHome {
+  font-weight: 500;
+  font-size: 17px;
+  padding: 18px 0;
+  color: #1b391b;
+}
+.homeLink {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+}
+
+.span {
+  width: 124px;
+}
