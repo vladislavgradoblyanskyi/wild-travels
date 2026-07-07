@@ -1,6 +1,6 @@
 "use client";
 
-import StoryCard from "@/components/StoryCard/StoryCard";
+import StoryCard from "@/components/ui/StoryCard/StoryCard";
 import styles from "./page.module.css";
 
 export default function Page() {
