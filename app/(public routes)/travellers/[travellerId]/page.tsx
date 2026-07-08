@@ -1,9 +1,11 @@
 import { Metadata } from 'next';
 import TravellerPublicProfile from '@/components/TravellerPage/TravellerPublicProfile/TravellerPublicProfile';
 import MessageNoStories from '@/components/MessageNoStories/MessageNoStories';
+/* Імпортуємо іменований компонент за головним UI-шляхом */
+import { PageTitle } from '@/components/UI/PageTitle/PageTitle';
 import styles from './Page.module.css';
 
-//  заглушка поки немає компонента для списку історій мандрівника
+// Заглушка, поки немає компонента для списку історій мандрівника
 const TravellerStoriesList = ({ travellerId }: { travellerId: string }) => (
   <div className={styles.placeholderList}>
     Тут зʼявиться список історій мандрівника (ID: {travellerId})
@@ -58,14 +60,15 @@ export default async function TravelerPage(props: any) {
   }
 
   const { user, stories } = data;
-
   const hasStories = stories && stories.length > 0;
 
   return (
     <main className={`container ${styles.pageContainer}`}>
       <TravellerPublicProfile traveller={user} />
 
-      <h3 className={styles.title}>Статті Мандрівника</h3>
+      <PageTitle tag="h2" className={styles.title}>
+        Статті Мандрівника
+      </PageTitle>
 
       {hasStories ? (
         <TravellerStoriesList travellerId={travellerId} />
