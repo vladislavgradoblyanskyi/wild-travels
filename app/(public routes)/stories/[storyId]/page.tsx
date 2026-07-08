@@ -9,6 +9,7 @@ import { RecommendedStories } from "../../../../components/StoryPage/RecomendedS
 
 import type { Story } from "../../../../types/story";
 import { getStoryById } from "../../../../lib/api/storyApi";
+import styles from "./page.module.css";
 
 export default function StoryPage() {
   const { storyId } = useParams();
@@ -27,7 +28,7 @@ export default function StoryPage() {
 
         setStory(data.story);
         setRecommended(data.recommendedStories);
-        setIsSaved(data.story.isSaved);
+        setIsSaved(data.story.isSaved ?? false);
       } catch {
         setStory(null);
       } finally {
@@ -60,7 +61,8 @@ export default function StoryPage() {
   }
 
   return (
-    <main>
+    <main className={styles.page}>
+      <div className={`container ${styles.container}`}>
       <StoryDetails story={story} />
       <SaveStory
         isSaved={isSaved}
@@ -68,6 +70,7 @@ export default function StoryPage() {
         onSave={handleSave}
       />
       <RecommendedStories stories={recommended} />
+      </div>
     </main>
   );
 }
