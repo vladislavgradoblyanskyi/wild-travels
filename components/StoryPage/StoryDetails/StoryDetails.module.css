@@ -1,0 +1,12 @@
+.button {
+  margin: 0px;
+  padding: 9px 12px;
+  width: 123px;
+  height: 48px;
+
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 150%;
+
+  color: var(--color-white);
+}

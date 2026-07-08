@@ -1,25 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import styles from "./StoryCard.module.css";
 
+import type { Story } from "../../../types/story";
 
-
-export type Story = {
-  _id: string;
-  title: string;
-  img: string;
-  rate: number;
-  ownerId: {
-    name: string;
-  };
-};
- 
 type Props = {
   story: Story;
   isSaved?: boolean;
   isPriority?: boolean;
-  onOpen?: (id: string) => void;
   onSave?: (id: string) => void;
 };
 
@@ -27,37 +17,36 @@ export default function StoryCard({
   story,
   isSaved = false,
   isPriority = false,
-  onOpen,
   onSave,
 }: Props) {
   return (
-    <div className={styles.card}>
+    <article className={styles.card}>
       <div className={styles.imageWrapper}>
         <Image
           src={story.img}
           alt={story.title}
           fill
-          className={styles.image}
           priority={isPriority}
+          className={styles.image}
         />
       </div>
 
       <div className={styles.content}>
         <p className={styles.meta}>
-          {story.ownerId.name}
-          <span className={styles.metaSeparator}>·</span>
-          {story.rate}
+          {story.author.name}
         </p>
 
-        <h3 className={styles.title}>{story.title}</h3>
+        <h3 className={styles.title}>
+          {story.title}
+        </h3>
 
         <div className={styles.actions}>
-          <button
-            className={styles.infoBtn}
-            onClick={() => onOpen?.(story._id)}
-          >
-            Переглянути
-          </button>
+          <Link
+              href={`/stories/${story._id}`}
+              className={styles.infoBtn}
+           >   
+              Переглянути статтю
+          </Link>
 
           <button
             className={styles.iconBtn}
@@ -68,6 +57,6 @@ export default function StoryCard({
           </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
