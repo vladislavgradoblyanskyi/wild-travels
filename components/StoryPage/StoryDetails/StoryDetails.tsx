@@ -51,11 +51,11 @@ export default function StoryDetails({ story }: Props) {
 
       <div className={css.categoryBadge}>{categoryName}</div>
 
-      <div className={css.content}>
-        {story.article
-          .split('\n')
-          .filter(Boolean)
-          .map((paragraph, index) => (
+    <div className={css.content}>
+  {(story.article ?? "")
+    .split("\n")
+    .filter(Boolean)
+    .map((paragraph, index) => (
             <p key={`${story._id}-${index}`} className={css.paragraph}>
               {paragraph}
             </p>

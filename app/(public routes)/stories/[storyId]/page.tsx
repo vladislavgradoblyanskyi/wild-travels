@@ -12,7 +12,9 @@ import { getStoryById } from "../../../../lib/api/storyApi";
 import styles from "./page.module.css";
 
 export default function StoryPage() {
-  const { storyId } = useParams();
+const params = useParams<{ storyId: string }>();
+
+const storyId = params.storyId;
 
   const [story, setStory] = useState<Story | null>(null);
   const [recommended, setRecommended] = useState<Story[]>([]);
@@ -21,25 +23,39 @@ export default function StoryPage() {
   const [isSaved, setIsSaved] = useState(false);
   const [saveLoading, setSaveLoading] = useState(false);
 
-  useEffect(() => {
-    async function loadStory() {
-      try {
-        const data = await getStoryById(storyId as string);
+ useEffect(() => {
+ const loadStory = async () => {
+  try {
+    setLoading(true);
 
-        setStory(data.story);
-        setRecommended(data.recommendedStories);
-        setIsSaved(data.story.isSaved ?? false);
-      } catch {
-        setStory(null);
-      } finally {
-        setLoading(false);
-      }
-    }
+    const data = await getStoryById(storyId);
 
-    if (storyId) {
-      loadStory();
-    }
-  }, [storyId]);
+console.log("FULL STORY DATA:", JSON.stringify(data, null, 2));
+
+
+    const storyData = data.story ?? data;
+
+    setStory(storyData);
+
+    setRecommended(
+      data.recommendedStories ?? []
+    );
+
+    setIsSaved(
+      storyData.isSaved ?? false
+    );
+
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setLoading(false);
+  }
+};
+
+  if (storyId) {
+    loadStory();
+  }
+}, [storyId]);
 
   const handleSave = async () => {
     try {
@@ -58,17 +74,19 @@ export default function StoryPage() {
     return <p>Такої історії не існує</p>;
   }
 
-  return (
-    <main className={styles.page}>
-      <div className={`container ${styles.container}`}>
-        <StoryDetails story={story} />
-        <SaveStory
-          isSaved={isSaved}
-          isLoading={saveLoading}
-          onSave={handleSave}
-        />
-        <RecommendedStories stories={recommended} />
-      </div>
-    </main>
-  );
+ return (
+  <div className={`container ${styles.container}`}>
+
+    <StoryDetails story={story} />
+
+    <SaveStory
+      isSaved={isSaved}
+      isLoading={saveLoading}
+      onSave={handleSave}
+    />
+
+    <RecommendedStories stories={recommended} />
+
+  </div>
+);
 }
