@@ -1,5 +1,6 @@
-import Link from 'next/link';
-/* Імпортуємо системний UI-компонент Button */
+'use client';
+
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/UI/buttons/btn';
 import styles from './MessageNoStories.module.css';
 
@@ -14,14 +15,19 @@ export default function MessageNoStories({
   buttonText,
   linkTo,
 }: MessageNoStoriesProps) {
+  const router = useRouter();
+
   return (
     <div className={styles.wrapper}>
       <p className={styles.text}>{text}</p>
-      <Link href={linkTo} passHref legacyBehavior>
-        <Button variant="primary" className={styles.button}>
-          {buttonText}
-        </Button>
-      </Link>
+
+      <Button
+        variant="primary"
+        className={styles.button}
+        onClick={() => router.push(linkTo)}
+      >
+        {buttonText}
+      </Button>
     </div>
   );
 }
