@@ -1,6 +1,6 @@
 import css from "./RecommendedStories.module.scss";
 
-import { StoryCard } from "../../../components/UI/StoryCard/StoryCard";
+import StoryCard  from "../../../components/UI/StoryCard/StoryCard";
 
 import type { Story } from "../../../types/story";
 
