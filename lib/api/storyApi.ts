@@ -15,3 +15,11 @@ export const addSavedArticle = async (articleId: string) => {
 
   return response.data;
 };
+
+export const removeSavedArticle = async (articleId: string) => {
+  const response = await nextServer.delete(
+    `/users/savedArticles/${articleId}`
+  );
+
+  return response.data;
+};
