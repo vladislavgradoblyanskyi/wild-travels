@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { useEffect } from "react";
@@ -35,25 +33,25 @@ export default function ErrorWhileSavingModal({ onClose }: Props) {
   };
 
   return (
-    <div
-      className={css.backdrop}
-      onClick={handleBackdrop}
-    >
+    <div className={css.backdrop} onClick={handleBackdrop}>
       <div className={css.modal}>
         <button
           className={css.closeBtn}
           onClick={onClose}
-          aria-label="Закрити"
+          type="button"
         >
           ✕
         </button>
 
         <h2 className={css.title}>
-          Щоб зберегти історію, необхідно авторизуватися
+          Помилка під час
+          <br />
+          збереження
         </h2>
 
         <p className={css.text}>
-          Увійдіть до свого акаунта або створіть новий.
+          Щоб зберегти статтю вам треба увійти, якщо ще немає
+          облікового запису зареєструйтесь
         </p>
 
         <div className={css.actions}>
@@ -70,7 +68,7 @@ export default function ErrorWhileSavingModal({ onClose }: Props) {
             className={css.registerBtn}
             onClick={onClose}
           >
-            Зареєструватись
+            Зарєєструватись
           </Link>
         </div>
       </div>
