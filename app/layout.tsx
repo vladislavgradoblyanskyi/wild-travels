@@ -6,6 +6,7 @@ import AppLayout from '@/components/layout/AppLayout/AppLayout';
 import AuthProvider from '@/components/providers/AuthProvider';
 import ToasterProvider from '@/components/providers/ToasterProvider';
 import ThemeProvider from '@/components/providers/ThemeProvider';
+import { Toaster } from "react-hot-toast";
 const montserrat = Montserrat({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
@@ -51,7 +52,9 @@ export default function RootLayout({
           <QueryProvider>
             <ToasterProvider />
             <AppLayout>
-              <AuthProvider>{children}</AuthProvider>
+              <AuthProvider>
+                {children}</AuthProvider>
+               <Toaster position="top-right" />
             </AppLayout>
           </QueryProvider>
         </ThemeProvider>

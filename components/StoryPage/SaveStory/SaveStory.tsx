@@ -1,3 +1,6 @@
+"use client";
+
+import SaveStoryButton from "../../../components/UI/SaveStoryButton/SaveStoryButton";
 import css from "./SaveStory.module.css";
 
 type Props = {
@@ -12,27 +15,19 @@ export default function SaveStory({
   onSave,
 }: Props) {
   return (
-    <section>
-      <h2>
-        Збережіть собі історію
-      </h2>
+    <section className={css.wrapper}>
+      <h2 className={css.title}>Збережіть собі історію</h2>
 
+      
       <p className={css.description}>
         Вона буде доступна у вашому профілі у розділі збережене
       </p>
 
-      <button
-        type="button"
-        className={css.button}
+      <SaveStoryButton
+        isSaved={isSaved}
+        isLoading={isLoading}
         onClick={onSave}
-        disabled={isLoading}
-      >
-        {isLoading
-          ? "Завантаження..."
-          : isSaved
-            ? "Видалити зі збережених"
-            : "Зберегти"}
-      </button>
+      />
     </section>
   );
 }
