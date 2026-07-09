@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import css from './authHeader.module.css';
+import { Icon } from '@/components/UI/Icon/Icon';
 
 export default function AuthHeader() {
   return (
@@ -12,9 +13,7 @@ export default function AuthHeader() {
             rel="noopener noreferrer"
             className={css.homeLink}
           >
-            <svg width="24" height="24" fill="#1b391b">
-              <use href="/icons/icons.svg#icon-eco" />
-            </svg>
+            <Icon name="icon-eco" width={24} height={24} fill="#1b391b"></Icon>
             <span className={css.span}>Природні Мандри</span>
           </Link>
         </nav>
