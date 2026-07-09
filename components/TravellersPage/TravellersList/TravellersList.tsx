@@ -3,9 +3,9 @@
 import css from './TravellersList.module.css';
 
 import { useEffect, useRef } from 'react';
-import TravellerCard from '../TravellerCard/TravellerCard';
-import LoaderComponent from '@/components/Loader/Loader';
-// import Pagination from '@/components/Pagination/Pagination';
+import TravellerCard from '@/components/UI/TravellerCard/TravellerCard';
+import { Pagination } from '@/components/UI/Pagination/Pagination';
+import { TravellersListSkeleton } from './TravellersListSkeleton';
 import { getTravellers } from '@/lib/api/clientApi';
 import type { Traveller, TravellersResponse } from '@/types/traveller';
 import { useInfiniteQuery } from '@tanstack/react-query';
@@ -44,7 +44,7 @@ export default function TravellersList() {
     }
   }, [isError, error]);
 
-  if (isLoading) return <LoaderComponent />;
+  if (isLoading) return <TravellersListSkeleton count={12} />;
 
   return (
     <>
@@ -58,15 +58,11 @@ export default function TravellersList() {
         ))}
       </div>
       <div className={css.paginationContainer}>
-        {/* {isFetchingNextPage ? (
-        <LoaderComponent />
-      ) : (
         <Pagination
-          fetchNextPage={fetchNextPage}
-          hasNextPage={!!hasNextPage}
-          isFetchingNextPage={isFetchingNextPage}
+          onClick={() => fetchNextPage()}
+          isVisible={!!hasNextPage}
+          isLoading={isFetchingNextPage}
         />
-      )} */}
       </div>
     </>
   );

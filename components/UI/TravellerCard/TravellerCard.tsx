@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { Button } from '../Buttons/Btn';
 import { useRouter } from 'next/navigation';
 import css from './TravellerCard.module.css';
 
@@ -25,14 +26,15 @@ export default function TravellerCard(traveller: TravellerCardProps) {
         className={css.travellerAvatar}
         width={130}
         height={130}
+        unoptimized
       />
       <h3 className={css.travellerName}>{traveller.name}</h3>
       <p className={css.travellerArticles}>
         Статей: {traveller.articlesAmount}
       </p>
-      <button className={css.travellerButton} onClick={handleViewProfile}>
+      <Button className={css.travellerButton} onClick={handleViewProfile}>
         Переглянути профіль
-      </button>
+      </Button>
     </div>
   );
 }

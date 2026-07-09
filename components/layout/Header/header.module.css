@@ -1,0 +1,311 @@
+.header {
+  width: 100%;
+  height: 72px;
+  background-color: #eef8ee;
+  position: relative;
+  z-index: 1000;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  z-index: 1030;
+}
+
+.logoSvg {
+  width: 124px;
+  height: 36px;
+  display: block;
+}
+
+.desktopNav {
+  display: none;
+}
+
+.headerActions,
+.guestWrapper,
+.userWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tabletDesktopAuthWrapper,
+.tabletDesktopPublishWrapper {
+  display: none;
+}
+
+.burgerMobileActionOnly {
+  display: block;
+  width: 100%;
+  padding: 0 20px;
+  margin-bottom: 24px;
+  box-sizing: border-box;
+}
+
+.burgerMobileActionOnly a + a {
+  margin-top: 12px;
+}
+
+.btnPrimary,
+.btnInverted {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  padding: 4px 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 150%;
+  border-radius: 6px;
+  text-decoration: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnPrimary {
+  background-color: #4a9849;
+  color: #ffffff;
+  border: 1px solid #4a9849;
+}
+
+.btnPrimary:hover {
+  background-color: #3f833e;
+  border-color: #3f833e;
+}
+
+.btnInverted {
+  background-color: #e2eae5;
+  color: #1c352d;
+  border: 1px solid #c8dad0;
+}
+
+.btnInverted:hover {
+  background-color: #d6e2dc;
+}
+
+.burgerButton {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 1030;
+  box-sizing: border-box;
+}
+
+.burgerIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.burgerMenu {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background-color: #eef8ee;
+  z-index: 1020;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.burgerMenuOpen {
+  transform: translateX(0);
+}
+
+.burgerMenuContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding-top: 60px;
+  height: calc(100dvh - 60px);
+}
+
+.burgerNav {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 24px;
+}
+
+.burgerNav a {
+  width: 100%;
+  padding: 8px 16px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-decoration: none;
+  color: #1b391b;
+  transition: color 0.2s ease;
+}
+
+.burgerNav a + a {
+  margin-top: 16px;
+}
+
+.burgerNav a:hover,
+.activeLink {
+  color: #4c9a54;
+}
+
+.burgerFooter {
+  width: 100%;
+  padding-bottom: 92px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.burgerUserProfileCentered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userProfileHeaderHiddenTablet {
+  display: none;
+}
+
+.avatarContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.userName {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #1b391b;
+}
+
+.avatarImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background-color: #d5e5db;
+  margin: 0 8px;
+  display: block;
+}
+
+.logoutBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 32px;
+  }
+
+  .burgerMobileActionOnly {
+    display: none;
+  }
+
+  .tabletDesktopAuthWrapper,
+  .tabletDesktopPublishWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 1040;
+  }
+
+  .burgerMenuContent {
+    padding-top: 80px;
+    height: calc(100dvh - 80px);
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    padding: 0 64px;
+    max-width: 1440px;
+    justify-content: space-between;
+  }
+
+  header .burgerButton,
+  header .burgerMenu {
+    display: none;
+  }
+
+  .headerActions {
+    gap: 16px;
+  }
+
+  .userWrapper {
+    gap: 16px;
+  }
+
+  .tabletDesktopAuthWrapper,
+  .tabletDesktopPublishWrapper {
+    display: flex;
+    z-index: auto;
+  }
+
+  .desktopNav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-left: auto;
+    margin-right: 32px;
+  }
+
+  .navLink {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 150%;
+    text-decoration: none;
+    color: #1b391b;
+    transition: color 0.2s ease;
+  }
+
+  .navLink:hover,
+  .activeLink {
+    color: #4c9a54;
+  }
+
+  .userProfileHeaderHiddenTablet {
+    display: flex;
+    align-items: center;
+  }
+}

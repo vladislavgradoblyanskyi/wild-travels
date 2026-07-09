@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 import { nextServer } from './api';
 import {
   CheckSessionRequest,
@@ -6,8 +6,28 @@ import {
   RegisterRequest,
 } from '@/types/auth';
 import { type TravellersResponse } from '@/types/traveller';
+import { User } from '@/types/user';
 
-export function getMe() {}
+export const getMe = async (): Promise<User> => {
+  try {
+    const { data } = await nextServer.get<User>('/api/profile/me');
+    return data;
+  } catch (error: unknown) {
+    let message = 'Не вдалося завантажити профіль';
+
+    if (error instanceof Error) {
+      message = error.message;
+    } else if (axios.isAxiosError(error)) {
+      message =
+        error.response?.data?.error ||
+        error.response?.data?.message ||
+        error.message;
+    }
+
+    throw new Error(message);
+  }
+};
+
 export const checkSession = async () => {
   const response =
     await nextServer.get<CheckSessionRequest>('/api/auth/refresh');
@@ -69,7 +89,9 @@ export const logout = async (): Promise<void> => {
 
 export async function getTravellers(page: number): Promise<TravellersResponse> {
   try {
-    const response = await nextServer.get<TravellersResponse>(`/api/travellers?page=${page}&perPage=12`);
+    const response = await nextServer.get<TravellersResponse>(
+      `/api/travellers?page=${page}&perPage=12`,
+    );
     return response.data;
   } catch (error: unknown) {
     if (error instanceof Error) {
