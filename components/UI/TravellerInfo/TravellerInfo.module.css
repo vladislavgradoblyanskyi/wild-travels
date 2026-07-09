@@ -1,0 +1,63 @@
+.travellerInfo {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 32px 0 0 0;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.avatarWrapper {
+  position: relative;
+  width: 113px;
+  height: 113px;
+  flex-shrink: 0;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.name {
+  font-size: 20px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+  color: var(--color-scheme-2-text);
+  margin: 0;
+}
+
+.count {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-scheme-2-text);
+  margin: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .avatarWrapper {
+    width: 145px;
+    height: 145px;
+  }
+
+  .name {
+    font-size: 32px;
+  }
+
+  .count {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 1140px) {
+  .travellerInfo {
+    margin-bottom: 38px;
+  }
+}
