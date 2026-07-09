@@ -1,5 +1,6 @@
 .section {
   padding: 72px 0;
+  background-color: var(--color-mantis-lightest);
 }
 
 .title {

@@ -4,6 +4,7 @@
   flex-direction: column;
   gap: 20px;
   color: #1b391b;
+  background-color: var(--color-mantis-lightest);
 }
 
 .wrap {
