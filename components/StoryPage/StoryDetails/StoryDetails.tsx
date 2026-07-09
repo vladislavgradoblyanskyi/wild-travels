@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { Icon } from "../../UI/Icon//Icon"
 import { PageTitle } from '@/components/UI/PageTitle/PageTitle';
 import type { Story } from '@/types/story';
 import css from './StoryDetails.module.css';
@@ -18,14 +19,17 @@ export default function StoryDetails({ story }: Props) {
 
   return (
     <article className={css.article}>
-
-      <Link href="/stories" className={css.backLink}>
-        <svg width="20" height="20" aria-hidden="true">
-          <use href="/Icons/icons.svg#icon-arrow_back" />
-        </svg>
-        <span>Всі статті</span>
-      </Link>
-
+      <div className={css.wrap}>
+<div>
+    <Link href="/stories" className={css.backLink}>
+        <Icon
+          className={css.iconLink}
+          name="icon-chevron_left"
+          width={24}
+          height={24}
+  />
+        <span className={css.textLink}>Всі статті</span>
+    </Link>
       <PageTitle className={css.title}>{story.title}</PageTitle>
 
       <ul className={css.meta}>
@@ -37,21 +41,21 @@ export default function StoryDetails({ story }: Props) {
           <span className={css.metaLabel}>Опубліковано</span>
           <span className={css.metaValue}>{story.date}</span>
         </li>
+         <div className={css.categoryBadge}>{categoryName}</div>
       </ul>
 
-      <div className={css.categoryBadge}>{categoryName}</div>
-
+        </div>
           <div className={css.imageWrap}>
         <Image
           src={story.img}
           alt={story.title}
-          width={1200}
-          height={720}
+          width={755}
+          height={503}
           className={css.image}
           priority
         />
       </div>
-
+</div>
     <div className={css.content}>
   {(story.article ?? "")
     .split("\n")
