@@ -45,10 +45,7 @@ export async function POST(req: NextRequest) {
         error.message ||
         'Помилка реєстрації';
 
-      return NextResponse.json(
-        { message: serverMessage }, // ← Уніфікуємо на message
-        { status },
-      );
+      return NextResponse.json({ message: serverMessage }, { status });
     }
 
     return NextResponse.json(
