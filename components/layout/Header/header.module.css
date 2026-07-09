@@ -1,21 +1,22 @@
 .header {
   width: 100%;
-  background-color: #eef8ee; /* Оновлено фон заголовка */
+  height: 72px;
+  background-color: #eef8ee;
   position: relative;
   z-index: 1000;
-  overflow-x: clip;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
 }
 
 .container {
   width: 100%;
-  height: 60px;
+  height: 100%;
   margin: 0 auto;
-  padding: 0 16px;
-
+  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   box-sizing: border-box;
 }
 
@@ -43,7 +44,6 @@
   gap: 12px;
 }
 
-/* Стан відображення елементів за замовчуванням (Мобільні пристрої) */
 .tabletDesktopAuthWrapper,
 .tabletDesktopPublishWrapper {
   display: none;
@@ -61,58 +61,56 @@
   margin-top: 12px;
 }
 
-/* КНОПКИ */
 .btnPrimary,
 .btnInverted {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 4px 10px; /* Внутрішні відступи 10px та 4px */
+  height: 38px;
+  padding: 4px 10px;
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
-  font-weight: 500; /* Текст Medium згідно з макетом */
-  line-height: 150%; /* Чітко 150% згідно з макетом */
-  border-radius: 8px;
+  font-weight: 500;
+  line-height: 150%;
+  border-radius: 6px;
   text-decoration: none;
   white-space: nowrap;
   box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* Зелена акцентна кнопка «Опублікувати статтю» / «Реєстрація» */
 .btnPrimary {
-  background-color: #4c9a54;
+  background-color: #4a9849;
   color: #ffffff;
-  border: none;
+  border: 1px solid #4a9849;
 }
 
-/* Інвертована кнопка «Вхід» (з налаштуваннями як у бургера) */
+.btnPrimary:hover {
+  background-color: #3f833e;
+  border-color: #3f833e;
+}
+
 .btnInverted {
-  background-color: rgba(0, 0, 0, 0.05); /* 5% від чорного */
-  border: 1px solid rgba(0, 0, 0, 0.15); /* Товщина 1px та 15% від чорного */
-  color: #1b391b;
+  background-color: #e2eae5;
+  color: #1c352d;
+  border: 1px solid #c8dad0;
 }
 
-.fullWidthBtn {
-  display: flex;
-  width: 100%;
-  box-sizing: border-box;
+.btnInverted:hover {
+  background-color: #d6e2dc;
 }
 
 .burgerButton {
   display: flex;
-  width: 32px; /* Змінено з 42px на 32px (Hug) */
-  height: 32px; /* Змінено з 42px на 32px (Hug) */
+  width: 32px;
+  height: 32px;
   align-items: center;
   justify-content: center;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.05
-  ); /* Чорний з 5% прозорості (Opacity/Neutral Darkest 5) */
-  border: 1px solid rgba(0, 0, 0, 0.15); /* Чорний з 15% прозорості (Color Scheme 2/Border) */
-  padding: 4px; /* Padding згідно з макетом */
-  border-radius: 8px; /* Radius/Small */
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 4px;
+  border-radius: 8px;
   cursor: pointer;
   z-index: 1030;
   box-sizing: border-box;
@@ -123,14 +121,13 @@
   height: 24px;
 }
 
-/* BURGER MENU */
 .burgerMenu {
   position: fixed;
   inset: 0;
   width: 100%;
   height: 100dvh;
   overflow: hidden;
-  background-color: #eef8ee; /* Оновлено фон меню */
+  background-color: #eef8ee;
   z-index: 1020;
   display: flex;
   flex-direction: column;
@@ -151,7 +148,6 @@
   height: calc(100dvh - 60px);
 }
 
-/* НАВІГАЦІЯ */
 .burgerNav {
   width: 100%;
   display: flex;
@@ -169,7 +165,8 @@
   font-weight: 400;
   line-height: 24px;
   text-decoration: none;
-  color: #1b391b; /* Оновлено колір тексту */
+  color: #1b391b;
+  transition: color 0.2s ease;
 }
 
 .burgerNav a + a {
@@ -181,7 +178,6 @@
   color: #4c9a54;
 }
 
-/* FOOTER BURGER */
 .burgerFooter {
   width: 100%;
   padding-bottom: 92px;
@@ -196,7 +192,6 @@
   justify-content: center;
 }
 
-/* PROFILE */
 .userProfileHeaderHiddenTablet {
   display: none;
 }
@@ -210,8 +205,8 @@
 .userName {
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
-  font-weight: 400; /* Встановлено 400 Regular */
-  color: #1b391b; /* Оновлено колір тексту */
+  font-weight: 400;
+  color: #1b391b;
 }
 
 .avatarImg {
@@ -225,6 +220,7 @@
   height: 24px;
   background-color: #d5e5db;
   margin: 0 8px;
+  display: block;
 }
 
 .logoutBtn {
@@ -236,10 +232,8 @@
   align-items: center;
 }
 
-/* ПЛАНШЕТ (TABLET) */
 @media (min-width: 768px) {
   .container {
-    height: 80px;
     padding: 0 32px;
   }
 
@@ -251,7 +245,7 @@
   .tabletDesktopPublishWrapper {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     z-index: 1040;
   }
 
@@ -261,15 +255,20 @@
   }
 }
 
-/* ДЕСКТОП / НОУТБУК (DESKTOP) */
 @media (min-width: 1440px) {
   .container {
     padding: 0 64px;
+    max-width: 1440px;
+    justify-content: space-between;
   }
 
-  .burgerButton,
-  .burgerMenu {
-    display: none !important;
+  header .burgerButton,
+  header .burgerMenu {
+    display: none;
+  }
+
+  .headerActions {
+    gap: 16px;
   }
 
   .userWrapper {
@@ -295,9 +294,14 @@
     font-size: 18px;
     font-weight: 400;
     line-height: 150%;
-    letter-spacing: 0%;
     text-decoration: none;
-    color: #1b391b; /* Оновлено колір тексту навігації */
+    color: #1b391b;
+    transition: color 0.2s ease;
+  }
+
+  .navLink:hover,
+  .activeLink {
+    color: #4c9a54;
   }
 
   .userProfileHeaderHiddenTablet {
