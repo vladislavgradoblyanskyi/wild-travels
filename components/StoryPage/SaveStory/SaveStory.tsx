@@ -1,4 +1,6 @@
-import css from './SaveStory.module.css';
+import { PageTitle } from "@/components/UI/PageTitle/PageTitle";
+import SaveStoryButton from "@/components/UI/SaveStoryButton/SaveStoryButton";
+import css from "./SaveStory.module.css";
 
 type Props = {
   isSaved: boolean;
@@ -13,24 +15,19 @@ export default function SaveStory({
 }: Props) {
   return (
     <section className={css.section}>
-      <h2 className={css.title}>Збережіть собі історію</h2>
+      <PageTitle tag="h2" className={css.title}>
+        Збережіть собі історію
+      </PageTitle>
 
       <p className={css.description}>
         Вона буде доступна у вашому профілі у розділі збережене
       </p>
 
-      <button
-        type="button"
-        className={css.button}
+      <SaveStoryButton
+        isSaved={isSaved}
+        isLoading={isLoading}
         onClick={onSave}
-        disabled={isLoading}
-      >
-        {isLoading
-          ? 'Завантаження...'
-          : isSaved
-            ? 'Видалити зі збережених'
-            : 'Зберегти'}
-      </button>
+      />
     </section>
   );
 }

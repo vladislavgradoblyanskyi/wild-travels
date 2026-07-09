@@ -1,4 +1,5 @@
 import StoryCard from '@/components/UI/StoryCard/StoryCard';
+import { PageTitle } from '@/components/UI/PageTitle/PageTitle';
 import type { Story } from '@/types/story';
 import css from './RecommendedStories.module.css';
 
@@ -13,11 +14,16 @@ export const RecommendedStories = ({ stories }: Props) => {
 
   return (
     <section className={css.section}>
-      <h2 className={css.title}>Вам також сподобається</h2>
+      <PageTitle tag="h2" className={css.title}>
+        Вам також сподобається
+      </PageTitle>
 
       <div className={css.list}>
         {stories.map((story) => (
-          <StoryCard key={story._id} story={story} />
+          <StoryCard
+            key={story._id}
+            story={story}
+          />
         ))}
       </div>
     </section>

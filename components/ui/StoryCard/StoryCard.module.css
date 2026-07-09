@@ -1,12 +1,11 @@
 .card {
-  background-color: #eef8ee;
-  color: #1b391b;
-  border-radius: 0;
   overflow: hidden;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+  border-radius: 12px;
+  background-color: var(--color-mantis-lighter);
 }
 
 .imageWrapper {
@@ -20,7 +19,7 @@
 }
 
 .content {
-  padding: 12px;
+  padding: 16px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -29,27 +28,28 @@
 
 .meta {
   display: flex;
-  gap: 6px;
-  font-size: 12px;
-  min-height: 20px;
-  color: #1b391b;
   align-items: center;
+  gap: 3px;
+  font-size: 16px;
+  min-height: 20px;
+  color: var(--color-scheme-2-text);
 }
 
 .metaSeparator {
-  color: #1b391b;
+  color: var(--color-scheme-2-text);
 }
 
 .title {
+  margin: 12px 0;
   display: -webkit-box;
-  color: #1b391b;
-  margin: 12px 0 16px;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  color: var(--color-scheme-2-text);
+
   overflow: hidden;
-  font-size: 18px;
+  font-size: 26px;
   font-weight: 700;
-  line-height: 1.35;
+  line-height: 1.5;
 }
 
 .actions {
@@ -61,7 +61,7 @@
 .infoBtn {
   flex: 1;
   min-width: 0;
-  height: 44px;
+  height: 48px;
   font-size: 16px;
   font-weight: 500;
   display: flex;

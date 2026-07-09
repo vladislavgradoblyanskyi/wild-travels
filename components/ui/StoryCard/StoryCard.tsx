@@ -13,19 +13,20 @@ type Props = {
 };
 
 function getMetaPrimary(story: Story) {
-  if (story.author?.name) {
-    return story.author.name;
-  }
-
+  if (story.author?.name) return story.author.name;
   if (typeof story.ownerId === 'object' && story.ownerId?.name) {
     return story.ownerId.name;
   }
 
-  if (typeof story.category === 'object') {
+  // Категорія як fallback
+  if (typeof story.category === 'object' && story.category?.category) {
     return story.category.category;
   }
+  if (typeof story.category === 'string') {
+    return story.category;
+  }
 
-  return story.category;
+  return 'Без категорії';
 }
 
 export default function StoryCard({

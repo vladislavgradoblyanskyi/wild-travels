@@ -1,8 +1,17 @@
 .article {
+  margin-bottom: 24px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   color: #1b391b;
+  background-color: var(--color-mantis-lightest);
+}
+
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 48px;
+  width: 100%;
 }
 
 .imageWrap {
@@ -11,8 +20,8 @@
 }
 
 .image {
-  width: 100%;
-  height: auto;
+  width: 755px;
+  height: 503px;
   border-radius: 24px;
   object-fit: cover;
 }
@@ -20,17 +29,29 @@
 .backLink {
   display: inline-flex;
   align-items: center;
+  margin-bottom: 24px;
   gap: 8px;
-  color: #1b391b;
-  font-size: 18px;
-  line-height: 1.4;
+}
+
+.iconLink {
+  fill: var(--color-mantis-darkest);
+}
+
+.textLink {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 150%;
 }
 
 .title {
+  margin-bottom: 24px;
+  text-align: left;
+  width: 533px;
   font-size: 24px;
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-  color: #1b391b;
+  font-weight: 700;
+  line-height: 110%;
+  letter-spacing: -0em;
+  color: var(--color-mantis-darkest);
 }
 
 .meta {
@@ -41,47 +62,47 @@
 
 .metaRow {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   gap: 8px;
-  font-size: 16px;
-  line-height: 1.4;
-  color: rgba(27, 57, 27, 0.8);
 }
 
 .metaLabel {
+  font-size: 18px;
   font-weight: 700;
-  color: #1b391b;
+  color: var(--color-mantis-darkest);
 }
 
 .metaValue {
-  color: rgba(27, 57, 27, 0.8);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--color-mantis-darkest);
 }
 
 .categoryBadge {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   width: fit-content;
-  min-height: 28px;
   padding: 4px 10px;
-  border-radius: 6px;
-  background-color: #f2f2f2;
-  color: #1b391b;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 150%;
+  color: var(--color-neutral-darkest);
+  border-radius: 6px;
+  border: transparent;
+  background-color: var(--opacity-neutral-darkest-5);
 }
 
 .content {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 .paragraph {
-  color: rgba(27, 57, 27, 0.8);
   font-size: 18px;
+  font-weight: 400;
   line-height: 1.56;
+  color: var(--color-neutral-darkest);
 }
 
 @media (min-width: 768px) {
@@ -113,7 +134,10 @@
   }
 
   .paragraph {
+    text-align: justify;
+    width: 865px;
     font-size: 20px;
     line-height: 1.6;
+    color: var(--color-mantis-darkest);
   }
 }
