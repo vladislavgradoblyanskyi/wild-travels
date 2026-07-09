@@ -7,8 +7,22 @@
     justify-content: center;
 }
 
+.pageTitleTravellers.pageTitleTravellers {
+    font-size: 32px;
+}
+
+@media (min-width: 768px) {
+    .pageTitleTravellers.pageTitleTravellers {
+        font-size: 48px;
+    }
+}
+
 @media (min-width: 1440px) {
     .travellersPage {
         margin: 48px 0 72px 0;
+    }
+
+    .pageTitleTravellers.pageTitleTravellers {
+        font-size: 56px;
     }
 }

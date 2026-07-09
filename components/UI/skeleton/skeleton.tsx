@@ -92,9 +92,7 @@ export const Skeleton = ({
               lastLine && styles.lastLine,
             )}
             style={
-              lastLine
-                ? { ...mergedStyle, width: width ?? '72%' }
-                : mergedStyle
+              lastLine ? { ...mergedStyle, width: width ?? '72%' } : mergedStyle
             }
           />
         );

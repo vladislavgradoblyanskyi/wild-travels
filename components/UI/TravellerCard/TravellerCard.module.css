@@ -8,13 +8,9 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-
     color: var(--color-scheme-2-text);
     font-family: var(--font-family);
     line-height: 150%;
-
-    max-width: 100%;
-
     flex: 0 0 auto;
 }
 
@@ -45,58 +41,53 @@
     width: 100%;
     height: 100%;
     background: var(--opacity-neutral-darkest-5);
-
     margin-top: 16px;
-
     color: var(--color-scheme-2-text);
     font-weight: 500;
     font-size: 16px;
     text-align: center;
-
-    transition: all 0.3s ease, color 0.3s ease;
+    transition: all 0.3s ease, color 0.3s ease !important;
 }
 
 .travellerButton:hover,
 .travellerButton:focus {
-    background: var(--color-mantis-dark);
-    border: 1px solid var(--opacity-transparent);
+    background: var(--color-mantis-dark) !important;
+    border: 1px solid var(--opacity-transparent) !important;
     color: var(--color-white);
 }
 
 .travellerButton:active {
-    background: var(--color-mantis-darker);
-    border: 1px solid var(--opacity-transparent);
+    background: var(--color-mantis-darker) !important;
+    border: 1px solid var(--opacity-transparent) !important;
     color: var(--color-white);
 }
 
 @media (min-width: 375px) {
-    .travellerCard {
-        max-width: 375px;
-    }
 
+    .travellerCard,
     .travellerButton {
-        max-width: 375px;
+        max-width: 375px !important;
     }
 }
 
 @media (min-width: 768px) {
     .travellerCard {
-        max-width: 218px;
+        width: 218px !important;
     }
 
     .travellerButton {
-        width: 170px;
+        width: 170px !important;
     }
 }
 
 @media (min-width: 1440px) {
     .travellerCard {
-        max-width: 310px;
-        height: 335px;
+        width: 310px !important;
+        height: 335px !important;
     }
 
     .travellerButton {
-        width: 262px;
-        height: 48px;
+        width: 262px !important;
+        height: 48px !important;
     }
 }

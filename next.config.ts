@@ -12,8 +12,12 @@ const nextConfig: NextConfig = {
         hostname: "ftp.goit.study",
         pathname: "/img/**",
       },
-
-    
+      {
+        protocol: 'https',
+        hostname: 'api.dicebear.com',
+        port: '',
+        pathname: '/**',
+      },
       {
         protocol: "https",
         hostname: "picsum.photos",
