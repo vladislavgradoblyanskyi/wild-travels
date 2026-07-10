@@ -5,9 +5,13 @@ import css from './RecommendedStories.module.css';
 
 type Props = {
   stories: Story[];
+  onSave?: (id: string) => void;
 };
 
-export const RecommendedStories = ({ stories }: Props) => {
+export const RecommendedStories = ({
+  stories,
+  onSave,
+}: Props) => {
   if (!stories.length) {
     return null;
   }
@@ -23,6 +27,7 @@ export const RecommendedStories = ({ stories }: Props) => {
           <StoryCard
             key={story._id}
             story={story}
+            onSave={onSave}
           />
         ))}
       </div>

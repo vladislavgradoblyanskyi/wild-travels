@@ -7,7 +7,6 @@ import styles from './StoryCard.module.css';
 
 type Props = {
   story: Story;
-  isSaved?: boolean;
   isPriority?: boolean;
   onSave?: (id: string) => void;
 };
@@ -31,12 +30,11 @@ function getMetaPrimary(story: Story) {
 
 export default function StoryCard({
   story,
-  isSaved = false,
   isPriority = false,
   onSave,
 }: Props) {
   const metaPrimary = getMetaPrimary(story);
-  const saveLabel = isSaved ? 'Збережено' : 'Зберегти';
+  const saveLabel = story.isSaved ? "Збережено" : "Зберегти";
 
   return (
     <article className={styles.card}>
@@ -75,17 +73,19 @@ export default function StoryCard({
             Переглянути статтю
           </Link>
 
-          <button
-            type="button"
-            className={`${styles.iconBtn} ${isSaved ? styles.iconBtnActive : ''}`}
-            onClick={() => onSave?.(story._id)}
-            aria-label={saveLabel}
-            title={saveLabel}
-          >
-            <svg width="20" height="20" aria-hidden="true">
-              <use href="/Icons/icons.svg#icon-bookmark" />
-            </svg>
-          </button>
+<button
+  type="button"
+  className={`${styles.iconBtn} ${
+    story.isSaved ? styles.iconBtnActive : ""
+  }`}
+  onClick={() => onSave?.(story._id)}
+  aria-label={story.isSaved ? "Збережено" : "Зберегти"}
+  title={story.isSaved ? "Збережено" : "Зберегти"}
+>
+  <svg width="20" height="20" aria-hidden="true">
+    <use href="/Icons/icons.svg#icon-bookmark" />
+  </svg>
+</button>
         </div>
       </div>
     </article>
