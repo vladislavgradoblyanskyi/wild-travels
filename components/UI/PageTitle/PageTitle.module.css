@@ -31,7 +31,7 @@ h3.title {
   font-size: 18px;
 }
 
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
   h1.title {
     font-size: 48px;
   }
@@ -53,4 +53,4 @@ h3.title {
   h3.title {
     font-size: 26px;
   }
-}
+} */

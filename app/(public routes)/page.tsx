@@ -1,6 +1,6 @@
-import Hero from '@/components/HomePage/Hero/Hero';
-import About from '@/components/HomePage/About/About';
-import Join from '@/components/HomePage/Join/Join';
+import Hero from '../../components/HomePage/Hero/hero';
+import About from '../../components/HomePage/About/about';
+import Join from '@/components/HomePage/Join/join';
 
 export const generateMetadata = async () => ({
   metadataBase: new URL('http://localhost:3000'),

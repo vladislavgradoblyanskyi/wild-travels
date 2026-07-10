@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import PageTitle from '../PageTitle/PageTitle';
 
-import styles from './Hero.module.css';
+import styles from './hero.module.css';
 
 import heroImg from '@/public/Image/hero-mob.webp';
 

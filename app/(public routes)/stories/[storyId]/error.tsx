@@ -1,5 +1,7 @@
 'use client';
 
+import css from "./page.module.css"
+
 export default function Error({
   error,
   reset,
@@ -8,8 +10,8 @@ export default function Error({
   reset: () => void;
 }) {
   return (
-    <div>
-      <h2>Сталася помилка</h2>
+    <div className={css.containerError}>
+      <h1 className={css.titleError}>Сталася помилка</h1>
       <button onClick={reset}>Спробувати ще раз</button>
     </div>
   );

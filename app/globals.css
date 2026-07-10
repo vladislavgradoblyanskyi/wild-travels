@@ -54,6 +54,7 @@
   --opacity-neutral-darkest-10: rgba(0, 0, 0, 0.1);
   --opacity-neutral-darkest-15: rgba(0, 0, 0, 0.15);
   --opacity-neutral-darkest-20: rgba(0, 0, 0, 0.2);
+  --opacity-neutral-darkest-25: rgba(0, 0, 0, 0.25);
   --opacity-neutral-darkest-30: rgba(0, 0, 0, 0.3);
   --opacity-neutral-darkest-40: rgba(0, 0, 0, 0.4);
   --opacity-neutral-darkest-50: rgba(0, 0, 0, 0.5);
@@ -178,8 +179,7 @@ button {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background:
-    radial-gradient(
+  background: radial-gradient(
       circle at 20% 30%,
       rgba(93, 190, 92, 0.15),
       transparent 60%

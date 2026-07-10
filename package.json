@@ -25,6 +25,7 @@
     "skeleton": "^4.15.2",
     "swagger-ui-express": "^5.0.1",
     "swiper": "^14.0.1",
+    "toast": "^0.5.4",
     "use-debounce": "^10.1.1",
     "yup": "^1.7.1",
     "zustand": "^5.0.14"

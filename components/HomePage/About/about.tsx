@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from './About.module.css';
+import styles from './about.module.css';
 
 import aboutImg from '@/public/Image/about-mob.webp';
 

@@ -201,3 +201,26 @@ export const getRecommendedStories = async (
     )
     .slice(0, 3);
 };
+
+export const addSavedArticle = async (storyId: string) => {
+  const response = await axios.post(
+    `https://wild-travels-backend.onrender.com/api/users/savedArticles/${storyId}`,
+    {},
+    {
+      withCredentials: true,
+    }
+  );
+
+  return response.data;
+};
+
+export const removeSavedArticle = async (storyId: string) => {
+  const response = await axios.delete(
+    `https://wild-travels-backend.onrender.com/api/users/savedArticles/${storyId}`,
+    {
+      withCredentials: true,
+    }
+  );
+
+  return response.data;
+};

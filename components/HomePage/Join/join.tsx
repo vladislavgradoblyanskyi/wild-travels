@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useAuthStore } from '@/lib/store/useAuthStore';
-import styles from './Join.module.css';
+import styles from './join.module.css';
 
 export default function Join() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
