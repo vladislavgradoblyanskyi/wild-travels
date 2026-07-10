@@ -1,5 +1,5 @@
-import StoryCard from '@/components/ui/StoryCard/StoryCard';
-import { PageTitle } from '@/components/ui/PageTitle/PageTitle';
+import StoryCard from '@/components/Ui/StoryCard/StoryCard';
+import { PageTitle } from '@/components/Ui/PageTitle/PageTitle';
 import type { Story } from '@/types/story';
 import css from './RecommendedStories.module.css';
 

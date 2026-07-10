@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Icon } from "../../ui/Icon/Icon"
-import { PageTitle } from '@/components/ui/PageTitle/PageTitle';
+import { Icon } from "../../Ui/Icon/Icon"
+import { PageTitle } from '@/components/Ui/PageTitle/PageTitle';
 import type { Story } from '@/types/story';
 import css from './StoryDetails.module.css';
 

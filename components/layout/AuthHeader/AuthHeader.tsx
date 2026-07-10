@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import css from './authHeader.module.css';
-import { Icon } from '@/components/ui/Icon/Icon';
+import { Icon } from '@/components/Ui/Icon/Icon';
 
 export default function AuthHeader() {
   return (

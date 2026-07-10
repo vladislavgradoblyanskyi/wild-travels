@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
-import { PageTitle } from '@/components/ui/PageTitle/PageTitle';
+import { PageTitle } from '@/components/Ui/PageTitle/PageTitle';
 import LoaderComponent from '@/components/Loader/Loader';
 import MessageNoStories from '@/components/MessageNoStories/MessageNoStories';
 import StoriesCategories from './CategoriesFilter/StoriesCategories';

@@ -1,4 +1,4 @@
-import { SkeletonCard } from '@/components/ui/Skeleton/Skeleton';
+import { SkeletonCard } from '@/components/Ui/Skeleton/Skeleton';
 import style from './TravellersList.module.css';
 import css from '@/components/UI/TravellerCard/TravellerCard.module.css';
 
