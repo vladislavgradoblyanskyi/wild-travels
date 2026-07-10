@@ -9,16 +9,15 @@ import type { Story } from '@/types/story';
 import type { StoriesResponse } from '@/types/story';
 import styles from './TravellersStories.module.css';
 
-type TravellersStoriesProps = {
-  ownerId?: string;
-  perPage?: number;
-};
-
 export default function TravellersStories({
   ownerId,
   perPage = 6,
-}: TravellersStoriesProps) {
+}: {
+  ownerId?: string;
+  perPage?: number;
+}) {
   const topRef = useRef<HTMLDivElement>(null);
+  const prevStoriesLengthRef = useRef(0);
 
   const {
     data,
@@ -54,18 +53,25 @@ export default function TravellersStories({
   }, [data]);
 
   useEffect(() => {
+    if (
+      stories.length > prevStoriesLengthRef.current &&
+      prevStoriesLengthRef.current > 0
+    ) {
+      if (topRef.current) {
+        topRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+    prevStoriesLengthRef.current = stories.length;
+  }, [stories.length]);
+
+  useEffect(() => {
     if (isError) {
       toast.error(error?.message || 'Не вдалося завантажити історії');
     }
   }, [isError, error]);
 
-  const handleLoadMore = async () => {
-    await fetchNextPage();
-    setTimeout(() => {
-      if (topRef.current) {
-        topRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 50);
+  const handleLoadMore = () => {
+    fetchNextPage();
   };
 
   return (
