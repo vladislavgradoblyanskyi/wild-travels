@@ -4,18 +4,23 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { toast } from "react-hot-toast";
 
+import { useAuthStore } from "../../../../lib/store/useAuthStore";
+import ErrorWhileSavingModal from "../../../../components/UI/ErrorWhileSavingModal/ErrorWhileSavingModal";
+
 import StoryDetails from "../../../../components/StoryPage/StoryDetails/StoryDetails";
 import SaveStory from "../../../../components/StoryPage/SaveStory/SaveStory";
 import { RecommendedStories } from "../../../../components/StoryPage/RecomendedStories/RecommendedStories";
+import LoaderComponent from "../../../../components/Loader/Loader";
+import NotFound from "./not-found";
 
 import type { Story } from "../../../../types/story";
 import { getStoryById } from "../../../../lib/api/storyApi";
 import { saveStory, unsaveStory } from "../../../../lib/api/clientApi";
-import { useAuthStore } from "../../../../lib/store/useAuthStore";
-import styles from "./page.module.css";
+import css from "./page.module.css";
 
 export default function StoryPage() {
-  const { storyId } = useParams();
+  const params = useParams<{ storyId: string }>();
+  const storyId = params.storyId;
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const [story, setStory] = useState<Story | null>(null);
@@ -25,20 +30,25 @@ export default function StoryPage() {
   const [isSaved, setIsSaved] = useState(false);
   const [saveLoading, setSaveLoading] = useState(false);
 
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
-    async function loadStory() {
+    const loadStory = async () => {
       try {
-        const data = await getStoryById(storyId as string);
+        setLoading(true);
+
+        const data = await getStoryById(storyId);
 
         setStory(data.story);
         setRecommended(data.recommendedStories);
         setIsSaved(data.story.isSaved ?? false);
-      } catch {
+      } catch (error) {
+        console.error(error);
         setStory(null);
       } finally {
         setLoading(false);
       }
-    }
+    };
 
     if (storyId) {
       loadStory();
@@ -49,7 +59,7 @@ export default function StoryPage() {
     if (!story) return;
 
     if (!isAuthenticated) {
-      toast.error("Увійдіть, щоб зберігати статті");
+      setShowModal(true);
       return;
     }
 
@@ -57,13 +67,16 @@ export default function StoryPage() {
     try {
       if (isSaved) {
         await unsaveStory(story._id);
+        setIsSaved(false);
+        toast.success("Історію видалено зі збережених");
       } else {
         await saveStory(story._id);
+        setIsSaved(true);
+        toast.success("Історію збережено");
       }
-      setIsSaved((prev) => !prev);
     } catch (error) {
       const message =
-        error instanceof Error ? error.message : "Не вдалося зберегти статтю";
+        error instanceof Error ? error.message : "Помилка збереження";
       toast.error(message);
     } finally {
       setSaveLoading(false);
@@ -71,24 +84,24 @@ export default function StoryPage() {
   };
 
   if (loading) {
-    return <p>Завантаження...</p>;
+    return <LoaderComponent />;
   }
 
   if (!story) {
-    return <p>Такої історії не існує</p>;
+    return <NotFound />;
   }
 
   return (
-    <main className={styles.page}>
-      <div className={`container ${styles.container}`}>
-        <StoryDetails story={story} />
-        <SaveStory
-          isSaved={isSaved}
-          isLoading={saveLoading}
-          onSave={handleSave}
-        />
-        <RecommendedStories stories={recommended} />
-      </div>
+    <main className={css.page}>
+      <StoryDetails story={story} />
+
+      <SaveStory isSaved={isSaved} isLoading={saveLoading} onSave={handleSave} />
+
+      <RecommendedStories stories={recommended} />
+
+      {showModal && (
+        <ErrorWhileSavingModal onClose={() => setShowModal(false)} />
+      )}
     </main>
   );
 }

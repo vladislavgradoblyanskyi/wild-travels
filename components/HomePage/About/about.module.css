@@ -1,0 +1,122 @@
+.about {
+    padding: 40px 0;
+    background-color: #f4f9f6;
+    /* font-family: sans-serif; */
+
+}
+
+.container {
+    min-width: 320px;
+    max-width: 100%;
+    padding: 0 20px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #0f2c11;
+    /* Темно-зеленый цвет */
+    margin-bottom: 20px;
+}
+
+.description {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333333;
+    margin-bottom: 32px;
+}
+
+.featuresList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.featureTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0f2c11;
+    margin-bottom: 12px;
+}
+
+.featureText {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #555555;
+}
+
+.imageWrapper {
+    width: 100%;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 16px;
+    /* Скругление углов по макету */
+}
+
+/* ==========================================================================
+   TABLET (від 768px)
+   ========================================================================== */
+@media (min-width: 768px) {
+    .about {
+        padding: 60px 0;
+    }
+
+    .container {
+        max-width: 720px;
+        padding: 0;
+        gap: 40px;
+    }
+
+    .title {
+        font-size: 36px;
+    }
+
+    .featuresList {
+        flex-direction: row;
+        gap: 32px;
+    }
+
+    .featureItem {
+        flex: 1;
+    }
+}
+
+/* ==========================================================================
+   DESKTOP (від 1440px)
+   ========================================================================== */
+@media (min-width: 1440px) {
+    .about {
+        padding: 100px 0;
+    }
+
+    .container {
+        max-width: 1280px;
+        flex-direction: row;
+        align-items: center;
+        gap: 64px;
+    }
+
+    .content {
+        flex: 1;
+    }
+
+    .imageWrapper {
+        flex: 1;
+    }
+
+    .title {
+        font-size: 44px;
+    }
+}

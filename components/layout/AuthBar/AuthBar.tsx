@@ -1,43 +1,32 @@
 'use client';
+
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import css from './authBar.module.css';
-import { motion } from 'motion/react';
+import headerCss from '../Header/header.module.css';
+import localCss from './authBar.module.css';
 
 export default function AuthBar() {
   const pathname = usePathname();
+  const isLoginActive = pathname === '/login';
+
+  const loginClass = isLoginActive
+    ? headerCss.btnPrimary
+    : headerCss.btnInverted;
+  const registerClass = !isLoginActive
+    ? headerCss.btnPrimary
+    : headerCss.btnInverted;
+
   return (
-    <div className="container">
-      <nav className={css.navigation}>
-        <ul className={css.navigationList}>
-          <motion.li
-            initial={{ opacity: 0, y: -30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className={css.navigationListItem}
-          >
-            <Link
-              href="/register"
-              className={`${css.tab} ${pathname === '/register' ? css.active : ''}`}
-            >
-              Реєстрація
-            </Link>
-          </motion.li>
-          <motion.li
-            initial={{ opacity: 0, y: -30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className={css.navigationListItem}
-          >
-            <Link
-              href="/login"
-              className={`${css.tab} ${pathname === '/login' ? css.active : ''}`}
-            >
-              Вхід
-            </Link>
-          </motion.li>
-        </ul>
-      </nav>
+    <div className={localCss.authBarWrapper}>
+      <Link href="/login" className={`${headerCss.btnPrimary} ${loginClass}`}>
+        Вхід
+      </Link>
+      <Link
+        href="/register"
+        className={`${headerCss.btnPrimary} ${registerClass}`}
+      >
+        Реєстрація
+      </Link>
     </div>
   );
 }

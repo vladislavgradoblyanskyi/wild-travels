@@ -1,0 +1,17 @@
+.section {
+  padding: 72px 0;
+  background-color: var(--color-mantis-lightest);
+}
+
+.title {
+  margin-bottom: 40px;
+  text-align: left;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.list {
+  display: flex;
+  gap: 24px;
+}

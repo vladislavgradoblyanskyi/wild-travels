@@ -1,76 +1,91 @@
-import { Metadata } from 'next';
-import TravellerPublicProfile from '@/components/TravellerPage/TravellerPublicProfile/TravellerPublicProfile';
-import MessageNoStories from '@/components/MessageNoStories/MessageNoStories';
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
+
+import TravellerInfo from '@/components/UI/TravellerInfo/TravellerInfo';
+import MessageNoStories from '@/components/UI/MessageNoStories/MessageNoStories';
 import { PageTitle } from '@/components/UI/PageTitle/PageTitle';
+import TravellersStories from '@/components/UI/TravellersStories/TravellersStories';
+import LoaderComponent from '@/components/Loader/Loader';
+
+import type { Story } from '@/types/story';
+import type { Traveller } from '@/types/traveller';
 import styles from './Page.module.css';
 
-// Заглушка, поки немає компонента для списку історій мандрівника
-const TravellerStoriesList = ({ travellerId }: { travellerId: string }) => (
-  <div className={styles.placeholderList}>
-    Тут зʼявиться список історій мандрівника (ID: {travellerId})
-  </div>
-);
+export default function TravelerPage() {
+  const params = useParams();
+  const travellerId = Array.isArray(params?.travellerId)
+    ? params.travellerId[0]
+    : (params?.travellerId as string | undefined);
 
-async function getTravellerData(travellerId: string) {
-  try {
-    const res = await fetch(
-      `http://localhost:3000/api/travellers/${travellerId}`,
-      {
-        next: { revalidate: 0 },
-      },
+  const [user, setUser] = useState<Traveller | null>(null);
+  const [stories, setStories] = useState<Story[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadTravellerData() {
+      if (!travellerId) return;
+
+      try {
+        const res = await fetch(`/api/travellers/${travellerId}`);
+        if (!res.ok) throw new Error();
+
+        const data = await res.json();
+
+        setUser(data.user);
+
+        const enrichedStories =
+          data.stories?.map((story: Story) => ({
+            ...story,
+            ownerId: {
+              _id: String(data.user._id),
+              name: data.user.name,
+              avatarUrl: data.user.avatarUrl,
+            },
+            author: {
+              name: data.user.name,
+            },
+          })) || [];
+
+        setStories(enrichedStories as Story[]);
+      } catch {
+        setUser(null);
+        setStories([]);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadTravellerData();
+  }, [travellerId]);
+
+  if (loading) {
+    return (
+      <div className={styles.loaderWrapper}>
+        <LoaderComponent />
+      </div>
     );
-    if (!res.ok) return null;
-    return await res.json();
-  } catch (error) {
-    return null;
-  }
-}
-
-export async function generateMetadata({ params }: any): Promise<Metadata> {
-  const resolvedParams = params ? await params : {};
-  const traveller = await getTravellerData(resolvedParams.travellerId);
-
-  if (!traveller || !traveller.user) {
-    return { title: 'Мандрівник не знайдений | Природні мандри' };
   }
 
-  return {
-    title: `Профіль мандрівника ${traveller.user.name} | Природні мандри`,
-    description: `Переглядайте публічні статті та історії мандрівника ${traveller.user.name} на сайті Природні мандри.`,
-  };
-}
-
-export default async function TravelerPage(props: any) {
-  const resolvedParams = props.params ? await props.params : {};
-  const travellerId = resolvedParams.travellerId;
-
-  if (!travellerId) {
+  if (!user) {
     return (
       <div className={styles.notFoundContainer}>Такий користувач відсутній</div>
     );
   }
 
-  const data = await getTravellerData(travellerId);
-
-  if (!data || !data.user) {
-    return (
-      <div className={styles.notFoundContainer}>Такий користувач відсутній</div>
-    );
-  }
-
-  const { user, stories } = data;
-  const hasStories = stories && stories.length > 0;
+  const hasStories = stories.length > 0;
 
   return (
     <main className={`container ${styles.pageContainer}`}>
-      <TravellerPublicProfile traveller={user} />
+      <TravellerInfo traveller={user} />
 
       <PageTitle tag="h2" className={styles.title}>
         Статті Мандрівника
       </PageTitle>
 
       {hasStories ? (
-        <TravellerStoriesList travellerId={travellerId} />
+        <TravellersStories ownerId={travellerId} perPage={6} />
       ) : (
         <MessageNoStories
           text="Цей користувач ще не публікував історій"

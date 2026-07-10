@@ -3,7 +3,9 @@
 import { useEffect } from "react";
 import Link from "next/link";
 
+import { Icon } from "../../UI/Icon//Icon"
 import css from "./ErrorWhileSavingModal.module.css";
+import { PageTitle } from "../../../components/UI/PageTitle/PageTitle";
 
 type Props = {
   onClose: () => void;
@@ -40,14 +42,12 @@ export default function ErrorWhileSavingModal({ onClose }: Props) {
           onClick={onClose}
           type="button"
         >
-          ✕
+          <Icon name="icon-close" width={24} height={24} />
         </button>
 
-        <h2 className={css.title}>
-          Помилка під час
-          <br />
-          збереження
-        </h2>
+        <PageTitle tag="h1" className={css.title}>
+          Помилка під час збереження
+        </PageTitle>
 
         <p className={css.text}>
           Щоб зберегти статтю вам треба увійти, якщо ще немає

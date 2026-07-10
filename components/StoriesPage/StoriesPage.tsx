@@ -5,7 +5,7 @@ import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { PageTitle } from '@/components/UI/PageTitle/PageTitle';
 import LoaderComponent from '@/components/Loader/Loader';
-import MessageNoStories from '@/components/MessageNoStories/MessageNoStories';
+import MessageNoStories from '@/components/UI/MessageNoStories/MessageNoStories';
 import StoriesCategories from './CategoriesFilter/StoriesCategories';
 import StoriesGrid from './CategoriesFilter/StoriesGrid';
 import { getCategories, getStories } from '@/lib/api/storyApi';
