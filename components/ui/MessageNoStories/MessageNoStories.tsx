@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/UI/buttons/btn';
+import { Button } from '@/components/ui/buttons/btn';
 import styles from './MessageNoStories.module.css';
 
 interface MessageNoStoriesProps {

@@ -1,6 +1,6 @@
-import { SkeletonCard } from '@/components/UI/Skeleton/Skeleton';
+import { SkeletonCard } from '@/components/ui/skeleton/skeleton';
 import style from './TravellersList.module.css';
-import css from '@/components/UI/TravellerCard/TravellerCard.module.css';
+import css from '@/components/ui/TravellerCard/TravellerCard.module.css';
 
 export const TravellersListSkeleton = ({ count = 6 }: { count?: number }) => {
   return (

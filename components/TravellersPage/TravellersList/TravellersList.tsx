@@ -3,8 +3,8 @@
 import css from './TravellersList.module.css';
 
 import { useEffect, useRef } from 'react';
-import TravellerCard from '@/components/UI/TravellerCard/TravellerCard';
-import { Pagination } from '@/components/UI/Pagination/Pagination';
+import TravellerCard from '@/components/ui/TravellerCard/TravellerCard';
+import { Pagination } from '@/components/ui/pagination/pagination';
 import { TravellersListSkeleton } from './TravellersListSkeleton';
 import { getTravellers } from '@/lib/api/clientApi';
 import type { Traveller, TravellersResponse } from '@/types/traveller';

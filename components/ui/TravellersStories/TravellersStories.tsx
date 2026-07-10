@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import StoriesGrid from '@/components/StoriesPage/CategoriesFilter/StoriesGrid';
-import { Button } from '@/components/UI/buttons/btn';
+import { Button } from '@/components/ui/buttons/btn';
 import type { Story } from '@/types/story';
 import type { StoriesResponse } from '@/types/story';
 import styles from './TravellersStories.module.css';

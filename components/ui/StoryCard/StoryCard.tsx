@@ -1,90 +1,93 @@
 'use client';
 
-import { useAuthStore } from '@/lib/store/useAuthStore';
-/// import { useStoriesStore } from '@/lib/store/useStoriesStore';
 import Image from 'next/image';
-import { Icon } from '../Icon/Icon';
-import { PageTitle } from '../PageTitle/PageTitle';
-import { Story } from '@/types/story';
-import { CustomLink } from '../Link/Link';
-import SaveStoryButton  from '../SaveStoryButton/SaveStoryButton';
-import styles from '@/components/ui/StoryCard/StoryCard.module.css';
-import { useEffect } from 'react';
+import Link from 'next/link';
+import type { Story } from '@/types/story';
+import styles from './StoryCard.module.css';
 
 type Props = {
   story: Story;
+  isSaved?: boolean;
   isPriority?: boolean;
+  onSave?: (id: string) => void;
 };
 
-export default function StoryCard({ story, isPriority = false }: Props) {
-  const { title, img, ownerId } = story;
+function getMetaPrimary(story: Story) {
+  if (story.author?.name) return story.author.name;
+  if (typeof story.ownerId === 'object' && story.ownerId?.name) {
+    return story.ownerId.name;
+  }
 
-  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
 
-  const initialIsSaved = useStoriesStore(
-    (s) => s.savedStories[story._id] ?? false,
-  );
+  if (typeof story.category === 'object' && story.category?.category) {
+    return story.category.category;
+  }
+  if (typeof story.category === 'string') {
+    return story.category;
+  }
 
-  const storyRateFromStore = useStoriesStore((s) => s.storiesRate[story._id]);
+  return 'Без категорії';
+}
 
-  const rate = storyRateFromStore ?? story.rate;
-
-  const initStoryRate = useStoriesStore((s) => s.initStoryRate);
-
-  useEffect(() => {
-    if (storyRateFromStore === undefined) {
-      initStoryRate(story._id, story.rate);
-    }
-  }, [story._id, story.rate, storyRateFromStore, initStoryRate]);
+export default function StoryCard({
+  story,
+  isSaved = false,
+  isPriority = false,
+  onSave,
+}: Props) {
+  const metaPrimary = getMetaPrimary(story);
+  const saveLabel = isSaved ? 'Збережено' : 'Зберегти';
 
   return (
-    <div className={styles.card}>
-      <div className={styles.imageWrapper} aria-hidden="true">
+    <article className={styles.card}>
+      <div className={styles.imageWrapper}>
         <Image
-          src={img}
-          alt={title}
+          src={story.img}
+          alt={story.title}
           fill
-          sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw"
           className={styles.image}
-          {...(isPriority ? { priority: true } : { loading: 'lazy' })}
+          priority={isPriority}
+          sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
         />
       </div>
 
       <div className={styles.content}>
         <p className={styles.meta}>
-          {ownerId.name}
-          <span className={styles.metaSeparator}>·</span>
-          {rate}
-          <Icon
-            name="icon-bookmark"
-            width={16}
-            height={16}
-            className={styles.svg}
-          />
+          <span className={styles.name}>{metaPrimary}</span>
+          <span className={styles.metaSeparator}>•</span>
+          <span className={styles.savedMeta}>
+            {story.savedCount}
+            <svg
+              className={styles.savedMetaIcon}
+              width="16"
+              height="16"
+              aria-hidden="true"
+            >
+              <use href="/Icons/icons.svg#icon-bookmark" />
+            </svg>
+          </span>
         </p>
 
-        <PageTitle className={styles.title} tag="h3">
-          {title}
-        </PageTitle>
+        <h3 className={styles.title}>{story.title}</h3>
 
         <div className={styles.actions}>
-          <CustomLink
-            href={`/stories/${story._id}`}
-            variant="secondary"
-            className={styles.infoBtn}
-          >
+          <Link href={`/stories/${story._id}`} className={styles.infoBtn}>
             Переглянути статтю
-          </CustomLink>
+          </Link>
 
-          <SaveStoryButton
-            storyId={story._id}
-            initialIsSaved={initialIsSaved}
-            isAuthenticated={isAuthenticated}
-            variant="icon"
-            className={styles.iconBtn}
-          />
+          <button
+            type="button"
+            className={`${styles.iconBtn} ${isSaved ? styles.iconBtnActive : ''}`}
+            onClick={() => onSave?.(story._id)}
+            aria-label={saveLabel}
+            title={saveLabel}
+          >
+            <svg width="20" height="20" aria-hidden="true">
+              <use href="/Icons/icons.svg#icon-bookmark" />
+            </svg>
+          </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

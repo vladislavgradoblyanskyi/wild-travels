@@ -1,6 +1,6 @@
 import TravellersList from '@/components/TravellersPage/TravellersList/TravellersList';
 import css from './Page.module.css';
-import { PageTitle } from '@/components/UI/PageTitle/PageTitle';
+import { PageTitle } from '@/components/Ui/PageTitle/PageTitle';
 
 export default async function TravellersPage() {
   return (

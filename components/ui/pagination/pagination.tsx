@@ -1,4 +1,4 @@
-import { Button } from '../Buttons/Btn';
+import { Button } from '../buttons/btn';
 import styles from './Pagination.module.css';
 
 interface PaginationProps {
