@@ -1,7 +1,7 @@
 'use client';
 
 import { ButtonHTMLAttributes, ReactNode } from 'react';
-import styles from './Btn.module.css';
+import styles from './btn.module.css';
 
 type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
 
