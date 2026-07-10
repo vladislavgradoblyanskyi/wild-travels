@@ -1,17 +1,18 @@
-import { Vortex } from 'react-loader-spinner';
+import styles from './Loader.module.css';
 
 export default function LoaderComponent() {
   return (
-    <div>
-      <Vortex
-        visible={true}
-        height="65"
-        width="65"
-        ariaLabel="vortex-loading"
-        wrapperStyle={{}}
-        wrapperClass="vortex-wrapper"
-        colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']}
-      />
+    <div className={styles.wrapper} role="status" aria-live="polite">
+      <div className={styles.scene} aria-hidden="true">
+        <div className={styles.sun} />
+        <div className={styles.ring} />
+        <div className={styles.mountains}>
+          <span className={styles.mountainBack} />
+          <span className={styles.mountainFront} />
+        </div>
+      </div>
+
+      <p className={styles.text}>Завантажуємо історії природи...</p>
     </div>
   );
 }

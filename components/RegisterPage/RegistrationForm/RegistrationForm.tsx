@@ -10,6 +10,7 @@ import { Field, type FieldProps } from 'formik';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { motion } from 'motion/react';
+import { useAuthStore } from '@/lib/store/useAuthStore';
 
 const initialValues: UserRegister = {
   password: '',
@@ -22,8 +23,8 @@ const registerValidationSchema = Yup.object().shape({
     .max(100, "Занадто довге ім'я")
     .trim()
     .matches(
-      /^(?=.*[a-zA-Zа-яА-ЯіІїЇєЄґҐ])[a-zA-Zа-яА-ЯіІїЇєЄґҐ0-9\s'-]+$/,
-      "Ім'я повинно містити хоча б одну літеру",
+      /^[a-zA-Zа-яА-ЯіІїЇєЄґҐ\s'-]+$/,
+      "Ім'я може містити тільки літери, пробіли, апостроф та дефіс",
     )
     .required("Ім'я та прізвище обов'язкове"),
 
@@ -34,14 +35,19 @@ const registerValidationSchema = Yup.object().shape({
     .required(),
 });
 export default function RegistrationForm() {
+  const setUser = useAuthStore((state) => state.setUser);
   const router = useRouter();
   const handleSubmit = async (
     values: UserRegister,
     { setSubmitting }: FormikHelpers<UserRegister>,
   ) => {
     try {
-      await userRegister(values);
+      const user = await userRegister(values);
+
       toast.success('Реєстрація успішна');
+
+      setUser(user);
+
       router.push('/');
     } catch (error) {
       let message = 'Щось пішло не так. Спробуйте ще раз.';

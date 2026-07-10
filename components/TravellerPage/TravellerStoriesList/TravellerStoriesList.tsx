@@ -12,10 +12,10 @@ export default function TravellerStoriesList({stories}: Props) {
   return (
     <div className={styles.travellerInfo}>
       <ul>
-        {stories.map((story) => (
+        {stories.map((story:Story) => (
           <li key={story._id}> 
             <h2>{story.title}</h2>
-            <p>Автор:{story.ownerId ? story.ownerId : 'Ви'}</p>
+            <p>Автор:{' '}{typeof story.ownerId === 'object' && story.ownerId?.name? story.ownerId.name : 'Ви'}</p>
           </li>
         ))}
       </ul>

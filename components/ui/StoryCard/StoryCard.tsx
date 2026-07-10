@@ -1,71 +1,88 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import styles from "./StoryCard.module.css";
+import { useAuthStore } from '@/lib/store/useAuthStore';
+/// import { useStoriesStore } from '@/lib/store/useStoriesStore';
+import Image from 'next/image';
+import { Icon } from '../Icon/Icon';
+import { PageTitle } from '../PageTitle/PageTitle';
+import { Story } from '@/types/story';
+import { CustomLink } from '../Link/Link';
+import SaveStoryButton  from '../SaveStoryButton/SaveStoryButton';
+import styles from '@/components/ui/StoryCard/StoryCard.module.css';
+import { useEffect } from 'react';
 
-
-
-export type Story = {
-  _id: string;
-  title: string;
-  img: string;
-  rate: number;
-  ownerId: {
-    name: string;
-  };
-};
- 
 type Props = {
   story: Story;
-  isSaved?: boolean;
   isPriority?: boolean;
-  onOpen?: (id: string) => void;
-  onSave?: (id: string) => void;
 };
 
-export default function StoryCard({
-  story,
-  isSaved = false,
-  isPriority = false,
-  onOpen,
-  onSave,
-}: Props) {
+export default function StoryCard({ story, isPriority = false }: Props) {
+  const { title, img, ownerId } = story;
+
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+
+  const initialIsSaved = useStoriesStore(
+    (s) => s.savedStories[story._id] ?? false,
+  );
+
+  const storyRateFromStore = useStoriesStore((s) => s.storiesRate[story._id]);
+
+  const rate = storyRateFromStore ?? story.rate;
+
+  const initStoryRate = useStoriesStore((s) => s.initStoryRate);
+
+  useEffect(() => {
+    if (storyRateFromStore === undefined) {
+      initStoryRate(story._id, story.rate);
+    }
+  }, [story._id, story.rate, storyRateFromStore, initStoryRate]);
+
   return (
     <div className={styles.card}>
-      <div className={styles.imageWrapper}>
+      <div className={styles.imageWrapper} aria-hidden="true">
         <Image
-          src={story.img}
-          alt={story.title}
+          src={img}
+          alt={title}
           fill
+          sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw"
           className={styles.image}
-          priority={isPriority}
+          {...(isPriority ? { priority: true } : { loading: 'lazy' })}
         />
       </div>
 
       <div className={styles.content}>
         <p className={styles.meta}>
-          {story.ownerId.name}
+          {ownerId.name}
           <span className={styles.metaSeparator}>·</span>
-          {story.rate}
+          {rate}
+          <Icon
+            name="icon-bookmark"
+            width={16}
+            height={16}
+            className={styles.svg}
+          />
         </p>
 
-        <h3 className={styles.title}>{story.title}</h3>
+        <PageTitle className={styles.title} tag="h3">
+          {title}
+        </PageTitle>
 
         <div className={styles.actions}>
-          <button
+          <CustomLink
+            href={`/stories/${story._id}`}
+            variant="secondary"
             className={styles.infoBtn}
-            onClick={() => onOpen?.(story._id)}
           >
-            Переглянути
-          </button>
+            Переглянути статтю
+          </CustomLink>
 
-          <button
+          <SaveStoryButton
+            storyId={story._id}
+            initialIsSaved={initialIsSaved}
+            isAuthenticated={isAuthenticated}
+            variant="icon"
             className={styles.iconBtn}
-            onClick={() => onSave?.(story._id)}
-            aria-label={isSaved ? "Збережено" : "Зберегти"}
-          >
-            {isSaved ? "★" : "☆"}
-          </button>
+          />
         </div>
       </div>
     </div>

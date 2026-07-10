@@ -10,6 +10,7 @@ import { Field, type FieldProps } from 'formik';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { motion } from 'motion/react';
+import { useAuthStore } from '@/lib/store/useAuthStore';
 
 const initialValues: UserLogin = {
   password: '',
@@ -22,13 +23,18 @@ const loginValidationSchema = Yup.object().shape({
 
 export default function LoginForm() {
   const router = useRouter();
+  const setUser = useAuthStore((state) => state.setUser);
   const handleSubmit = async (
     values: UserLogin,
     { setSubmitting }: FormikHelpers<UserLogin>,
   ) => {
     try {
-      await userLogin(values);
+      const user = await userLogin(values);
+
       toast.success('Успішний вхід');
+
+      setUser(user);
+
       router.push('/');
     } catch (error) {
       let message = 'Щось пішло не так. Спробуйте ще раз.';
