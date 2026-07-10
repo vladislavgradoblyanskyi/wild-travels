@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/UI/buttons/btn';
+import { Button } from '@/components/ui/buttons/btn';
 import type { Story } from '@/types/story';
 import styles from './StoryCard.module.css';
 

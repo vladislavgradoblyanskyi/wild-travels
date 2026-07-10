@@ -10,10 +10,10 @@ import { toast } from 'react-hot-toast';
 
 import { getPopularStories, saveStory, unsaveStory } from '@/lib/api/clientApi';
 import { useAuthStore } from '@/lib/store/useAuthStore';
-import StoryCard from '@/components/UI/StoryCard/StoryCard';
+import StoryCard from '@/components/ui/StoryCard/StoryCard';
 
-import { Button } from '@/components/UI/buttons/btn';
-import { PageTitle } from '@/components/UI/PageTitle/PageTitle';
+import { Button } from '@/components/ui/buttons/btn';
+import { PageTitle } from '@/components/ui/PageTitle/PageTitle';
 import LoaderComponent from '@/components/Loader/Loader';
 
 import 'swiper/css';

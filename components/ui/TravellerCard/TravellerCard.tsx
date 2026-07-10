@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/UI/buttons/btn';
+import { Button } from '@/components/ui/buttons/btn';
 import type { Traveller } from '@/types/traveller';
 import styles from './TravellerCard.module.css';
 

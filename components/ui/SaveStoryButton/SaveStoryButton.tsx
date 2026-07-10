@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/buttons/btn';
-import { Icon } from '@/components/UI/Icon/Icon';
+import { Icon } from '@/components/ui/Icon/Icon';
 import styles from './SaveStoryButton.module.css';
 
 type Props = {

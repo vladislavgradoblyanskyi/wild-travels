@@ -11,9 +11,9 @@ import { toast } from 'react-hot-toast';
 import { getTravellers } from '@/lib/api/clientApi';
 import type { Traveller } from '@/types/traveller';
 
-import { Button } from '@/components/UI/buttons/btn';
-import { PageTitle } from '@/components/UI/PageTitle/PageTitle';
-import TravellerCard from '@/components/UI/TravellerCard/TravellerCard';
+import { Button } from '@/components/ui/buttons/btn';
+import { PageTitle } from '@/components/ui/PageTitle/PageTitle';
+import TravellerCard from '@/components/ui/TravellerCard/TravellerCard';
 import LoaderComponent from '@/components/Loader/Loader';
 
 import 'swiper/css';
