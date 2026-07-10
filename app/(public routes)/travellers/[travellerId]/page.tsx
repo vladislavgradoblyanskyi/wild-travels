@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 
 import TravellerInfo from '@/components/UI/TravellerInfo/TravellerInfo';
-import MessageNoStories from '@/components/MessageNoStories/MessageNoStories';
+import MessageNoStories from '@/components/UI/MessageNoStories/MessageNoStories';
 import { PageTitle } from '@/components/UI/PageTitle/PageTitle';
 import TravellersStories from '@/components/UI/TravellersStories/TravellersStories';
 import LoaderComponent from '@/components/Loader/Loader';
