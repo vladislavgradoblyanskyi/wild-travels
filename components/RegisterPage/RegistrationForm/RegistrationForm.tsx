@@ -111,7 +111,9 @@ export default function RegistrationForm() {
                     id="name"
                     type="text"
                     autoComplete="name"
-                    className={`${css.input} ${meta.touched && meta.error ? css.errorInput : ''}`}
+                    className={`${css.input} ${
+                      meta.touched && meta.error ? css.errorInput : ''
+                    }`}
                   />
 
                   <p className={css.error}>{meta.touched ? meta.error : ''}</p>
@@ -138,7 +140,9 @@ export default function RegistrationForm() {
                     id="email"
                     type="email"
                     autoComplete="email"
-                    className={`${css.input} ${meta.touched && meta.error ? css.errorInput : ''}`}
+                    className={`${css.input} ${
+                      meta.touched && meta.error ? css.errorInput : ''
+                    }`}
                   />
 
                   <p className={css.error}>{meta.touched ? meta.error : ''}</p>
@@ -164,7 +168,9 @@ export default function RegistrationForm() {
                     {...field}
                     type="password"
                     id="password"
-                    className={`${css.input} ${meta.touched && meta.error ? css.errorInput : ''}`}
+                    className={`${css.input} ${
+                      meta.touched && meta.error ? css.errorInput : ''
+                    }`}
                   />
 
                   <p className={css.error}>{meta.touched ? meta.error : ''}</p>
