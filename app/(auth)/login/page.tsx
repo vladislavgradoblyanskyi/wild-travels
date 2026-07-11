@@ -1,7 +1,7 @@
-import AuthBar from '@/components/layout/AuthBar/AuthBar';
 import AuthFooter from '@/components/layout/AuthFooter/AuthFooter';
 import AuthHeader from '@/components/layout/AuthHeader/AuthHeader';
 import LoginForm from '@/components/LoginPage/LoginForm/LoginForm';
+import LoginBar from '@/components/layout/LoginBar/LoginBar';
 import css from './loginglobal.module.css';
 
 export default function Login() {
@@ -11,7 +11,7 @@ export default function Login() {
 
       <div className={css.main}>
         <div className={css.container}>
-          <AuthBar />
+          <LoginBar />
           <LoginForm />
         </div>
       </div>

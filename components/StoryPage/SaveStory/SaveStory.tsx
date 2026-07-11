@@ -1,5 +1,5 @@
-import { PageTitle } from "@/components/UI/PageTitle/PageTitle";
-import SaveStoryButton from "@/components/UI/SaveStoryButton/SaveStoryButton";
+import { PageTitle } from "@/components/Ui/PageTitle/PageTitle";
+import SaveStoryButton from "@/components/ui/SaveStoryButton/SaveStoryButton";
 import css from "./SaveStory.module.css";
 
 type Props = {

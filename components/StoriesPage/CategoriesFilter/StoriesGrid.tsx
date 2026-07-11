@@ -1,4 +1,4 @@
-import StoryCard from '@/components/UI/StoryCard/StoryCard';
+import StoryCard from '@/components/ui/StoryCard/StoryCard';
 import type { Story } from '@/types/story';
 import styles from './StoriesGrid.module.css';
 

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Button } from '../Buttons/Btn';
+import { Button } from '../buttons/btn';
 import { useRouter } from 'next/navigation';
 import css from './TravellerCard.module.css';
 

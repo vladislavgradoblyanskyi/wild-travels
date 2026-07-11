@@ -5,7 +5,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 
 import css from './footer.module.css';
-import { Icon } from '@/components/UI/Icon/Icon';
+import { Icon } from '@/components/ui/Icon/Icon';
 
 
 export default function Footer() {
