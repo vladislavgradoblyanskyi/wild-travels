@@ -1,21 +1,21 @@
 'use client'
 import { Story } from '@/types/story';
 import css from './MyStoriesClient.module.css';
-import TravellerStoriesList from '@/components/TravellerPage/TravellerStoriesList/TravellerStoriesList'
+import StoriesList from '@/components/ProfilePage/StoriesList/StoriesList'
 import Link from 'next/link';
 
 interface Props {
-stories:Story[]
+Ownstories:Story[]
 }
-export default function MyStoriesClient({stories}:Props){
+export default function MyStoriesClient({Ownstories}:Props){
     
     
     return (
   <>
-    {stories && stories.length > 0 ? (<TravellerStoriesList stories={stories}/>) : (
+    {Ownstories && Ownstories.length > 0 ? (<StoriesList stories={Ownstories}/>) : (
       <>
         <div className={css.null_stories_div}>
-          <h2>
+          <h2 className={css.text}>
             Ви ще нічого не публікували, поділіться своєю першою історією!
           </h2>
           <Link href={'/new-story'} className={css.stories_link}>Опублікувати історію</Link>
