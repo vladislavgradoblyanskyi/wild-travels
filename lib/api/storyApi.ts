@@ -1,9 +1,9 @@
 import { nextServer } from "./api";
+import { AxiosError } from "axios";
 
 import type {
   CategoriesResponse,
   Story,
-  StoryResponse,
   StoriesResponse,
 } from "@/types/story";
 
@@ -115,6 +115,16 @@ export const getStories = async ({
       }
     );
 
+    console.log("=== STORIES FROM API ===");
+  response.data.data.forEach((story: Story) => {
+    console.log({
+      id: story._id,
+      title: story.title,
+      isSaved: story.isSaved,
+      savedCount: story.savedCount,
+    });
+  });
+
   const enrichedStories = await enrichStoriesWithOwners(
     response.data.data
   );
@@ -133,7 +143,93 @@ export const getCategories = async (): Promise<CategoriesResponse> => {
   return response.data;
 };
 
-export const getStoryById = async (id: string): Promise<StoryResponse> => {
-  const response = await nextServer.get<StoryResponse>(`/api/stories/${id}`);
-  return response.data;
+
+export const getStoryById = async (id: string) => {
+  const response = await nextServer.get(`/api/stories/${id}`);
+
+  console.log("FULL STORY RESPONSE:", response.data);
+
+  const story = response.data.story ?? response.data;
+
+  const [enrichedStory] = await enrichStoriesWithOwners([story]);
+
+  const categoriesResponse = await getCategories();
+
+  const categoryId =
+    typeof enrichedStory.category === "string"
+      ? enrichedStory.category
+      : enrichedStory.category._id;
+
+  const category = categoriesResponse.data.find(
+    (item) => item._id === categoryId
+  );
+
+  return {
+    ...response.data,
+    story: {
+      ...enrichedStory,
+      category: category ?? enrichedStory.category,
+    },
+  };
+};
+
+export const getRecommendedStories = async (
+  story: Story
+): Promise<Story[]> => {
+
+  const categoryId =
+    typeof story.category === "string"
+      ? story.category
+      : story.category._id;
+
+
+  const response = await getStories({
+    pageParam: 1,
+    perPage: 4,
+    category: categoryId,
+  });
+
+
+return response.data
+  .filter(
+    (item) => item._id !== story._id
+  )
+  .slice(0, 3)
+  .map((item) => ({
+    ...item,
+    isSaved: item.isSaved ?? false,
+  }));
+};
+
+// export const addSavedArticle = async (storyId: string) => {
+//   const { data } = await nextServer.post(
+//     `/api/profile/savedArticles/${storyId}`
+//   );
+
+//   return data;
+// };
+
+export const addSavedArticle = async (storyId: string) => {
+  try {
+    const { data } = await nextServer.post(
+      `/api/profile/savedArticles/${storyId}`
+    );
+
+    return data;
+  } catch (error) {
+    const err = error as AxiosError;
+
+    console.log("STATUS:", err.response?.status);
+    console.log("RESPONSE:", err.response?.data);
+
+    throw error;
+  }
+};
+
+export const removeSavedArticle = async (storyId: string) => {
+  const { data } = await nextServer.delete(
+    `/api/profile/savedArticles/${storyId}`
+  );
+
+  return data;
 };
