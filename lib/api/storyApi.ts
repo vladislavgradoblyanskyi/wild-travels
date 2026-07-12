@@ -1,5 +1,5 @@
 import { nextServer } from "./api";
-import axios,{AxiosError} from "axios";
+import {AxiosError} from "axios";
 import type {
   CategoriesResponse,
   Story,
@@ -43,7 +43,7 @@ async function getTravellerProfile(id: string) {
   return user;
 }
 
-async function enrichStoriesWithOwners(
+export async function enrichStoriesWithOwners(
   stories: Story[]
 ): Promise<Story[]> {
   const ownerIds = Array.from(

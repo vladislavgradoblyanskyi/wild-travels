@@ -1,18 +1,16 @@
 'use client'
-import { Story } from '@/types/story';
+import { OwnStoriesResponse, StoriesResponse } from '@/types/story';
 import css from './MyStoriesClient.module.css';
 import StoriesList from '@/components/ProfilePage/StoriesList/StoriesList'
 import Link from 'next/link';
 
 interface Props {
-Ownstories:Story[]
+res:StoriesResponse;
 }
-export default function MyStoriesClient({Ownstories}:Props){
-    
-    
+export default function MyStoriesClient({res}:Props){
     return (
   <>
-    {Ownstories && Ownstories.length > 0 ? (<StoriesList stories={Ownstories}/>) : (
+    {res && res.data.length > 0 ? (<StoriesList stories={res.data}/>) : (
       <>
         <div className={css.null_stories_div}>
           <h2 className={css.text}>
@@ -24,5 +22,4 @@ export default function MyStoriesClient({Ownstories}:Props){
     )}
   </>
 );
-    
 }

@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 import { CheckSessionRequest } from '@/types/auth';
 import { User } from '@/types/user';
 import { Story } from '@/types/story';
+import {enrichStoriesWithOwners} from './storyApi'
 export const checkSession = async () => {
   const cookieStore = await cookies();
   const res = await nextServer.get<CheckSessionRequest>('/api/auth/refresh', {
@@ -42,19 +43,35 @@ stories:Story[]
 export const GetOwnStoriesServer = async ():Promise<OwnStories> => {
   const cookieStore = await cookies();
   const {data} = await nextServer.get('/api/profile/own', {
+      params: {
+        page: 1,
+        perPage: 6,
+      },
     headers: {
       Cookie: cookieStore.toString(),
     },
   });
-  return data;
+  const enrichedStories = await enrichStoriesWithOwners(data.stories);
+    return {
+    ...data,
+    data: enrichedStories,
+  };
 };
 
 export const GetSavedStoriesServer = async() =>{
   const cookieStore = await cookies();
   const {data} = await nextServer.get('/api/profile/saved-stories', {
+      params: {
+        page: 1,
+        perPage: 6,
+      },
     headers: {
       Cookie: cookieStore.toString(),
     },
   });
-  return data;
+    const enrichedStories = await enrichStoriesWithOwners(data.data);
+    return {
+    ...data,
+    data: enrichedStories,
+  };
 }
