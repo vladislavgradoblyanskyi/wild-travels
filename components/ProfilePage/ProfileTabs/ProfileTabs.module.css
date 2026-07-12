@@ -1,0 +1,57 @@
+.container {
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 32px 20px 40px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 32px 32px 40px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1440px;
+    padding: 48px 64px 40px;
+  }
+}
+.profiletabs{
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+flex-direction: row;
+gap: 10px;
+border: 1px solid rgba(255, 255, 255, 0);
+border-radius: 10px;
+background: #def2de;
+padding: 4px;
+}
+
+@media (min-width: 768px) {
+  .profiletabs {
+    width: 422px;
+    height: 48px;
+  }
+}
+
+.tabButton{
+width: 50%;
+height: 40px;
+font-weight: 400;
+font-size: 16px;
+line-height: 1.5;
+color: #1b391b;
+}
+
+.tabButton.active{
+font-weight: 500;
+font-size: 16px;
+line-height: 1.5;
+color: #1b391b;
+border: 1px solid rgba(0, 0, 0, 0.15);
+border-radius: 8px;
+padding: 4px 4px;
+background: #eef8ee;
+}

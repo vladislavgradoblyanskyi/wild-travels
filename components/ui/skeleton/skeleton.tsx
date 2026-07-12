@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import type { CSSProperties, HTMLAttributes } from 'react';
-import styles from './Skeleton.module.css';
+import styles from './skeleton.module.css';
 
 type SkeletonVariant =
   | 'text'

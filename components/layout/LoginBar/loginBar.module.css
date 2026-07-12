@@ -1,0 +1,39 @@
+.navigation {
+  padding-top: 64px;
+}
+.navigationList {
+  display: flex;
+  width: 100%;
+  max-width: 644px;
+  list-style: none;
+  margin: 0 auto;
+}
+.navigationListItem {
+  flex: 1;
+}
+.tab {
+  text-align: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid transparent;
+  font-size: 16px;
+  line-height: 1.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  padding: 12px 0;
+  text-decoration: none;
+  transition: transform 0.5s ease;
+}
+@media only screen and (min-width: 1440px) {
+  .tab {
+    font-size: 18px;
+  }
+}
+.tab:hover {
+  transform: translateY((-3px));
+}
+.active {
+  border-bottom-color: #4f3b32;
+}

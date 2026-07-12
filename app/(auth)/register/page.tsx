@@ -1,8 +1,8 @@
-import AuthBar from '@/components/layout/AuthBar/AuthBar';
 import AuthFooter from '@/components/layout/AuthFooter/AuthFooter';
 import AuthHeader from '@/components/layout/AuthHeader/AuthHeader';
 import RegistrationForm from '@/components/RegisterPage/RegistrationForm/RegistrationForm';
 import css from './registrationglobal.module.css';
+import LoginBar from '@/components/layout/LoginBar/LoginBar';
 
 export default function Register() {
   return (
@@ -11,7 +11,7 @@ export default function Register() {
 
       <div className={css.main}>
         <div className={css.container}>
-          <AuthBar />
+          <LoginBar />
           <RegistrationForm />
         </div>
       </div>

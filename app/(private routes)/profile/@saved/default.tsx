@@ -1,3 +1,3 @@
-export default function Component() {
+export default function DefaultSavedStories() {
   return null;
 }

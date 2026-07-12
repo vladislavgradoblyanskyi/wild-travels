@@ -1,5 +1,7 @@
 import Hero from '../../components/HomePage/Hero/hero';
+import PopularStories from '../../components/HomePage/PopularStories/PopularStories';
 import About from '../../components/HomePage/About/about';
+import OurTravellers from '../../components/HomePage/OurTravellers/OurTravellers';
 import Join from '@/components/HomePage/Join/join';
 
 export const generateMetadata = async () => ({
@@ -17,7 +19,9 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <PopularStories />
       <About />
+      <OurTravellers />
       <Join />
     </>
   );

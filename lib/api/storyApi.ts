@@ -1,6 +1,5 @@
 import { nextServer } from "./api";
-import { AxiosError } from "axios";
-
+import axios,{AxiosError} from "axios";
 import type {
   CategoriesResponse,
   Story,

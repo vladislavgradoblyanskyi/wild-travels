@@ -2,6 +2,10 @@
   display: block;
 }
 
+.messageWrapper {
+  margin-bottom: 64px;
+}
+
 .title {
   font-size: 28px;
   letter-spacing: -0.01em;
@@ -19,15 +23,6 @@
   font-weight: 500;
   color: var(--text-secondary);
   text-align: center;
-}
-
-.placeholderList {
-  text-align: center;
-  padding: 32px 16px;
-  background: var(--color-scheme-2-foreground);
-  border-radius: 12px;
-  border: 1px solid var(--color-scheme-1-border);
-  color: var(--text-on-scheme-2-primary);
 }
 
 @media only screen and (min-width: 768px) {

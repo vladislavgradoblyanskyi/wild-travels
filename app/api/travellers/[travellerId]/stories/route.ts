@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { api } from '../../../api'; 
+import type { Story } from '@/types/story'; 
 
 export async function GET(
   req: NextRequest,
-  props: { params: Promise<{ travellerId: string }> }
+  { params }: { params: Promise<{ travellerId: string }> }
 ) {
   try {
-    const { travellerId } = await props.params;
+    const { travellerId } = await params;
     const { searchParams } = new URL(req.url);
     
     const page = searchParams.get('page') || '1';
@@ -15,7 +16,7 @@ export async function GET(
     const apiRes = await api.get(`/users/${travellerId}`);
     
     const user = apiRes.data.user;
-    const allUserStories = apiRes.data.stories || [];
+    const allUserStories = (apiRes.data.stories || []) as Story[];
     
     const p = parseInt(page, 10);
     const pp = parseInt(perPage, 10);
@@ -23,15 +24,15 @@ export async function GET(
     const slicedStories = allUserStories.slice((p - 1) * pp, p * pp);
     const totalPages = Math.ceil(allUserStories.length / pp);
 
-    const enrichedStories = slicedStories.map((story: any) => ({
+    const enrichedStories = slicedStories.map((story) => ({
       ...story,
       ownerId: {
-        _id: user._id,
-        name: user.name,
-        avatarUrl: user.avatarUrl || user.avatar,
+        _id: user._id as string,
+        name: user.name as string,
+        avatarUrl: (user.avatarUrl || user.avatar) as string,
       },
       author: {
-        name: user.name,
+        name: user.name as string,
       }
     }));
 
@@ -42,10 +43,16 @@ export async function GET(
     }, { status: 200 });
 
   } catch (error: unknown) {
-    console.error('Traveller stories proxy error:', (error as Error).message);
+    const err = error as { 
+      message?: string; 
+      response?: { data?: { message?: string }; status?: number } 
+    };
+
+    console.error('Traveller stories proxy error:', err.message);
+    
     return NextResponse.json(
-      { message: 'Помилка сервера при отриманні історій мандрівника' },
-      { status: 500 }
+      { message: err.response?.data?.message || 'Помилка сервера при отриманні історій мандрівника' },
+      { status: err.response?.status || 500 }
     );
   }
 }

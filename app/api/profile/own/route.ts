@@ -10,7 +10,7 @@ export async function GET() {
   try {
     const cookieStore = await cookies();
 
-    const res = await api.get('/profile/me', {
+    const res = await api.get('/profile/stories', {
       headers: {
         Cookie: cookieStore.toString(),
       },
