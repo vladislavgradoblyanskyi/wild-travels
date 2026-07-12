@@ -13,7 +13,7 @@
 Завантажує загальну стрічку публікацій сайту:
 
 ```tsx
-import TravellersStories from '@/components/UI/TravellersStories/TravellersStories';
+import TravellersStories from '@/components/ui/TravellersStories/TravellersStories';
 
 export default function StoriesPage() {
   return <TravellersStories />;
@@ -25,7 +25,7 @@ export default function StoriesPage() {
 Завантажує статті лише конкретного мандрівника:
 
 ```tsx
-import TravellersStories from '@/components/UI/TravellersStories/TravellersStories';
+import TravellersStories from '@/components/ui/TravellersStories/TravellersStories';
 
 export default function TravelerPage({ travellerId }) {
   return <TravellersStories ownerId={travellerId} perPage={6} />;

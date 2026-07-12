@@ -19,7 +19,7 @@
 Імпортуйте компонент:
 
 ```tsx
-import { Input } from '@/components/UI/Input/Input';
+import { Input } from '@/components/ui/Input/Input';
 ```
 
 ---
