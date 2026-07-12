@@ -6,9 +6,8 @@
 }
 
 .pagination {
-  display: flex;
-  justify-content: center;
   margin-top: 40px;
+  padding: 0;
 }
 
 @media (min-width: 1440px) {

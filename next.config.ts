@@ -1,16 +1,16 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "ac.goit.global",
+        protocol: 'https',
+        hostname: 'ac.goit.global',
       },
       {
-        protocol: "https",
-        hostname: "ftp.goit.study",
-        pathname: "/img/**",
+        protocol: 'https',
+        hostname: 'ftp.goit.study',
+        pathname: '/**',
       },
       {
         protocol: 'https',
@@ -19,8 +19,17 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
       {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**',
+      },
+      {
         protocol: "https",
-        hostname: "picsum.photos",
+        hostname: "api.dicebear.com",
       },
       {
         protocol: "https",

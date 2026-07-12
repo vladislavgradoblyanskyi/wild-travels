@@ -1,3 +1,1 @@
-export default function Page() {
-  return <div>Profile</div>
-}
+export default function DefaultMyStories() {return null}

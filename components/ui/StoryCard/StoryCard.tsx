@@ -1,7 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/buttons/btn';
 import type { Story } from '@/types/story';
 import styles from './StoryCard.module.css';
 
@@ -17,7 +18,6 @@ function getMetaPrimary(story: Story) {
   if (typeof story.ownerId === 'object' && story.ownerId?.name) {
     return story.ownerId.name;
   }
-
 
   if (typeof story.category === 'object' && story.category?.category) {
     return story.category.category;
@@ -35,6 +35,7 @@ export default function StoryCard({
   isPriority = false,
   onSave,
 }: Props) {
+  const router = useRouter();
   const metaPrimary = getMetaPrimary(story);
   const saveLabel = isSaved ? 'Збережено' : 'Зберегти';
 
@@ -71,12 +72,18 @@ export default function StoryCard({
         <h3 className={styles.title}>{story.title}</h3>
 
         <div className={styles.actions}>
-          <Link href={`/stories/${story._id}`} className={styles.infoBtn}>
-            Переглянути статтю
-          </Link>
-
-          <button
+          <Button
             type="button"
+            variant="secondary"
+            className={styles.infoBtn}
+            onClick={() => router.push(`/stories/${story._id}`)}
+          >
+            Переглянути статтю
+          </Button>
+
+          <Button
+            type="button"
+            variant="secondary"
             className={`${styles.iconBtn} ${isSaved ? styles.iconBtnActive : ''}`}
             onClick={() => onSave?.(story._id)}
             aria-label={saveLabel}
@@ -85,7 +92,7 @@ export default function StoryCard({
             <svg width="20" height="20" aria-hidden="true">
               <use href="/Icons/icons.svg#icon-bookmark" />
             </svg>
-          </button>
+          </Button>
         </div>
       </div>
     </article>

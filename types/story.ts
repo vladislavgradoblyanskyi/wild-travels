@@ -3,11 +3,10 @@ export type StoryCategory = {
   category: string;
 };
 
-export type StoryOwner =
-  | string
-  | {
-      _id?: string;
-      name?: string;
+export type StoryOwner = string | 
+    {
+      _id: string;
+      name?: string;  
       avatarUrl?: string;
     };
 
@@ -18,7 +17,13 @@ export type Story = {
   article: string;
   category: string | StoryCategory;
   date: string;
-  ownerId: StoryOwner;
+  ownerId: string | 
+    {
+      _id: string;
+      name?: string;  
+      avatarUrl?: string;
+    };
+  
   author?: {
     name: string;
   };

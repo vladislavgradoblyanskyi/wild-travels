@@ -1,18 +1,19 @@
 'use client';
 
-import css from "./page.module.css"
+import { Button } from '@/components/ui/buttons/btn';
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error;
+type Props = {
+  error: Error & { digest?: string };
   reset: () => void;
-}) {
+};
+
+export default function StoryError({ error, reset }: Props) {
   return (
-    <div className={css.containerError}>
-      <h1 className={css.titleError}>Сталася помилка</h1>
-      <button onClick={reset}>Спробувати ще раз</button>
+    <div className="container">
+      <p>Не вдалося завантажити статтю. {error.message}</p>
+      <Button type="button" variant="secondary" onClick={reset}>
+        Спробувати ще раз
+      </Button>
     </div>
   );
 }

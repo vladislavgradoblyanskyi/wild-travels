@@ -1,12 +1,19 @@
-import css from "./page.module.css"
+import Link from 'next/link';
+import css from '@/app/NotFound.module.css';
 
-export default function NotFound() {
+export default function StoryNotFound() {
   return (
-    <div className={css.containerError}>
-      <h1 className={css.titleError}>404 – Сторінку не знайдено</h1>
-      <p className={css.descriptionError}>
-        На жаль, сторінки, яку ви шукаєте, не існує.
-      </p>
+    <div className="container">
+      <div className={css.wrapper}>
+        <h1 className={css.title}>404 - Статтю не знайдено</h1>
+
+        <p className={css.description}>
+          На жаль, статті, яку ви шукаєте, не існує або її було видалено.
+        </p>
+        <Link className={css.link} href="/stories">
+          Повернутися до статей
+        </Link>
+      </div>
     </div>
   );
 }

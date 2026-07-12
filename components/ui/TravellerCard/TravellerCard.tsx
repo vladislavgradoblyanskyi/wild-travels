@@ -1,40 +1,43 @@
 'use client';
 
 import Image from 'next/image';
-import { Button } from '../buttons/btn';
 import { useRouter } from 'next/navigation';
-import css from './TravellerCard.module.css';
+import { Button } from '@/components/ui/buttons/btn';
+import type { Traveller } from '@/types/traveller';
+import styles from './TravellerCard.module.css';
 
-interface TravellerCardProps {
-  _id: number;
-  avatarUrl: string;
-  name: string;
-  articlesAmount: number;
-}
+type Props = {
+  traveller: Traveller;
+};
 
-export default function TravellerCard(traveller: TravellerCardProps) {
+export default function TravellerCard({ traveller }: Props) {
   const router = useRouter();
-  const handleViewProfile = () => {
-    router.push(`/travellers/${traveller._id}`);
-  };
 
   return (
-    <div className={css.travellerCard}>
-      <Image
-        src={traveller.avatarUrl}
-        alt={traveller.name}
-        className={css.travellerAvatar}
-        width={130}
-        height={130}
-        unoptimized
-      />
-      <h3 className={css.travellerName}>{traveller.name}</h3>
-      <p className={css.travellerArticles}>
-        Статей: {traveller.articlesAmount}
-      </p>
-      <Button className={css.travellerButton} onClick={handleViewProfile}>
+    <article className={styles.card}>
+      <div className={styles.avatarWrap}>
+        <Image
+          src={traveller.avatarUrl}
+          alt={traveller.name}
+          fill
+          unoptimized
+          className={styles.avatar}
+        />
+      </div>
+
+      <div className={styles.textBlock}>
+        <h3 className={styles.cardTitle}>{traveller.name}</h3>
+        <p className={styles.meta}>Статей: {traveller.articlesAmount}</p>
+      </div>
+
+      <Button
+        type="button"
+        variant="secondary"
+        className={styles.profileBtn}
+        onClick={() => router.push(`/travellers/${traveller._id}`)}
+      >
         Переглянути профіль
       </Button>
-    </div>
+    </article>
   );
 }

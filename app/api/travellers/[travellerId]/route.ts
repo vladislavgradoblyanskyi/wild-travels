@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { api } from '../../api'; 
 
-export async function GET(req: NextRequest, props: any) {
+export async function GET(
+  req: NextRequest, 
+  { params }: { params: Promise<{ travellerId: string }> }
+) {
   try {
-    const resolvedParams = props.params ? await props.params : {};
-    const { travellerId } = resolvedParams;
+    const { travellerId } = await params;
 
     if (!travellerId) {
       return NextResponse.json({ message: 'ID мандрівника обовʼязковий' }, { status: 400 });
@@ -13,12 +15,17 @@ export async function GET(req: NextRequest, props: any) {
     const apiRes = await api.get(`/users/${travellerId}`);
 
     return NextResponse.json(apiRes.data, { status: apiRes.status });
-  } catch (error: any) {
-    console.error(`Proxy Error для юзера:`, error.message);
+  } catch (error: unknown) {
+    const err = error as { 
+      message?: string; 
+      response?: { data?: { message?: string }; status?: number } 
+    };
+
+    console.error(`Proxy Error для юзера:`, err.message);
     
     return NextResponse.json(
-      { message: error.response?.data?.message || 'Помилка отримання даних з бекенду' },
-      { status: error.response?.status || 500 }
+      { message: err.response?.data?.message || 'Помилка отримання даних з бекенду' },
+      { status: err.response?.status || 500 }
     );
   }
 }
