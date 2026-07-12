@@ -58,12 +58,12 @@ export const GetOwnStoriesServer = async ():Promise<OwnStories> => {
   };
 };
 
-export const GetSavedStoriesServer = async() =>{
+export const GetSavedStoriesServer = async(page:number,perPage:number) =>{
   const cookieStore = await cookies();
   const {data} = await nextServer.get('/api/profile/saved-stories', {
       params: {
-        page: 1,
-        perPage: 6,
+        page,
+        perPage,
       },
     headers: {
       Cookie: cookieStore.toString(),

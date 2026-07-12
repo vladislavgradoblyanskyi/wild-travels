@@ -8,7 +8,6 @@ interface Props {
 res: StoriesResponse;
 }
 export default function SavedStoriesClient({res}: Props){
-  console.log(res);
   
         return (
       <>
