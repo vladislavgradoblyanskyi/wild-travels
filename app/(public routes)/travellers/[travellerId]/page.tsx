@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 
-
 import TravellerInfo from '@/components/ui/TravellerInfo/TravellerInfo';
 import MessageNoStories from '../../../../components/ui/MessageNoStories/MessageNoStories';
 import { PageTitle } from '@/components/ui/PageTitle/PageTitle';
@@ -89,11 +88,13 @@ export default function TravelerPage() {
       {hasStories ? (
         <TravellersStories ownerId={travellerId} perPage={6} />
       ) : (
-        <MessageNoStories
-          text="Цей користувач ще не публікував історій"
-          buttonText="Назад до історій"
-          linkTo="/stories"
-        />
+        <div className={styles.messageWrapper}>
+          <MessageNoStories
+            text="Цей користувач ще не публікував історій"
+            buttonText="Назад до історій"
+            linkTo="/stories"
+          />
+        </div>
       )}
     </main>
   );
