@@ -11,7 +11,7 @@ import { User } from '@/types/user';
 
 export const getMe = async (): Promise<User> => {
   try {
-    const { data } = await nextServer.get<User>(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/me`);
+    const { data } = await nextServer.get<User>('/api/profile/me');
     return data;
   } catch (error: unknown) {
     let message = 'Не вдалося завантажити профіль';
@@ -31,13 +31,13 @@ export const getMe = async (): Promise<User> => {
 
 export const checkSession = async () => {
   const response =
-    await nextServer.get<CheckSessionRequest>(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/refresh`);
+    await nextServer.get<CheckSessionRequest>('/api/auth/refresh');
   return response.data.success;
 };
 
 export async function userLogin(data: LoginRequest) {
   try {
-    const response = await nextServer.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, data);
+    const response = await nextServer.post('/api/auth/login', data);
     return response.data;
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
@@ -61,7 +61,7 @@ export async function userLogin(data: LoginRequest) {
 
 export async function userRegister(data: RegisterRequest) {
   try {
-    const response = await nextServer.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/register`, data);
+    const response = await nextServer.post('/api/auth/register', data);
     return response.data;
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
@@ -85,13 +85,13 @@ export async function userRegister(data: RegisterRequest) {
 }
 
 export const logout = async (): Promise<void> => {
-  await nextServer.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/logout`);
+  await nextServer.post('/api/auth/logout');
 };
 
 export async function getTravellers(page: number): Promise<TravellersResponse> {
   try {
     const response = await nextServer.get<TravellersResponse>(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/travellers?page=${page}&perPage=12`,
+      `/api/travellers?page=${page}&perPage=12`,
     );
     return response.data;
   } catch (error: unknown) {
@@ -115,7 +115,7 @@ export async function getPopularStories(
 ): Promise<PopularStoriesResponse> {
   try {
     const response = await nextServer.get<PopularStoriesResponse>(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/stories/popular`,
+      '/api/stories/popular',
       { params: { perPage } },
     );
     return response.data;
@@ -136,7 +136,7 @@ export type SaveStoryResponse = {
 export async function saveStory(storyId: string): Promise<SaveStoryResponse> {
   try {
     const response = await nextServer.post<SaveStoryResponse>(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/stories/${storyId}/save`,
+      `/api/stories/${storyId}/save`,
     );
     return response.data;
   } catch (error: unknown) {
@@ -156,7 +156,7 @@ export async function unsaveStory(
 ): Promise<SaveStoryResponse> {
   try {
     const response = await nextServer.delete<SaveStoryResponse>(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/stories/${storyId}/save`,
+      `/api/stories/${storyId}/save`,
     );
     return response.data;
   } catch (error: unknown) {

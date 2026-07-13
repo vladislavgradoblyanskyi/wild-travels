@@ -31,7 +31,7 @@ async function getTravellerProfile(id: string) {
 
   const response =
     await nextServer.get<TravellerProfileResponse>(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/travellers/${id}`
+      `/api/travellers/${id}`
     );
 
   const user = response.data.user;
@@ -104,7 +104,7 @@ export const getStories = async ({
 }: GetStoriesParams = {}): Promise<StoriesResponse> => {
   const response =
     await nextServer.get<StoriesResponse>(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/stories`,
+      "/api/stories",
       {
         params: {
           page: pageParam,
@@ -136,7 +136,7 @@ export const getStories = async ({
 
 export const getCategories = async (): Promise<CategoriesResponse> => {
   const response = await nextServer.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/categories`
+    "/api/categories"
   );
 
   return response.data;
@@ -144,7 +144,7 @@ export const getCategories = async (): Promise<CategoriesResponse> => {
 
 
 export const getStoryById = async (id: string) => {
-  const response = await nextServer.get(`${process.env.NEXT_PUBLIC_API_URL}/api/stories/${id}`);
+  const response = await nextServer.get(`/api/stories/${id}`);
 
   console.log("FULL STORY RESPONSE:", response.data);
 
@@ -211,7 +211,7 @@ return response.data
 export const addSavedArticle = async (storyId: string) => {
   try {
     const { data } = await nextServer.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/profile/savedArticles/${storyId}`
+      `/api/profile/savedArticles/${storyId}`
     );
 
     return data;
@@ -227,7 +227,7 @@ export const addSavedArticle = async (storyId: string) => {
 
 export const removeSavedArticle = async (storyId: string) => {
   const { data } = await nextServer.delete(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/profile/savedArticles/${storyId}`
+    `/api/profile/savedArticles/${storyId}`
   );
 
   return data;
@@ -235,7 +235,7 @@ export const removeSavedArticle = async (storyId: string) => {
 
 
 export const GetSavedStories = async(page:number,perPage:number) =>{
-  const {data} = await nextServer.get(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/saved-stories`, {
+  const {data} = await nextServer.get('/api/profile/saved-stories', {
       params: {
         page,
         perPage,
