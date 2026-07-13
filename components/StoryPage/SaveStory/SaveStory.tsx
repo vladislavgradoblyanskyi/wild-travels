@@ -1,5 +1,5 @@
 import { PageTitle } from "@/components/ui/PageTitle/PageTitle";
-import SaveStoryButton from "@/components/ui/SaveStoryButton/SaveStoryButton";
+import {SaveButton} from "@/components/ui/SaveStoryButton/SaveStoryButton";
 import css from "./SaveStory.module.css";
 
 type Props = {
@@ -23,7 +23,7 @@ export default function SaveStory({
         Вона буде доступна у вашому профілі у розділі збережене
       </p>
 
-      <SaveStoryButton
+      <SaveButton
         isSaved={isSaved}
         isLoading={isLoading}
         onClick={onSave}

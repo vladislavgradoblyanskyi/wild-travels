@@ -36,3 +36,24 @@ export default function SaveStoryButton({
     </Button>
   );
 }
+
+export function SaveButton({
+  isSaved,
+  isLoading,
+  onClick,
+}: Props) {
+  return (
+    <button
+      type="button"
+      className={styles.button}
+      onClick={onClick}
+      disabled={isLoading}
+    >
+      {isLoading
+        ? "Завантаження..."
+        : isSaved
+        ? "Видалити зі збережених"
+        : "Зберегти"}
+    </button>
+  );
+}
