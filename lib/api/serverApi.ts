@@ -17,7 +17,7 @@ export const checkSession = async () => {
 
 export const GetMeServer = async (): Promise<User> => {
   const cookieStore = await cookies();
-  const {data} = await nextServer.get('/api/profile/me', {
+  const {data} = await nextServer.get(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/me`, {
     headers: {
       Cookie: cookieStore.toString(),
     },
@@ -27,7 +27,7 @@ export const GetMeServer = async (): Promise<User> => {
 
 
 export const GetUserById = async(id: string): Promise<User> =>{
-  const {data} = await nextServer.get(`/api/travellers/${id}`);
+  const {data} = await nextServer.get(`${process.env.NEXT_PUBLIC_API_URL}/api/travellers/${id}`);
   return data;
 }
 
@@ -42,7 +42,7 @@ stories:Story[]
 
 export const GetOwnStoriesServer = async ():Promise<OwnStories> => {
   const cookieStore = await cookies();
-  const {data} = await nextServer.get('/api/profile/own', {
+  const {data} = await nextServer.get(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/own`, {
       params: {
         page: 1,
         perPage: 6,
@@ -60,7 +60,7 @@ export const GetOwnStoriesServer = async ():Promise<OwnStories> => {
 
 export const GetSavedStoriesServer = async() =>{
   const cookieStore = await cookies();
-  const {data} = await nextServer.get('/api/profile/saved-stories', {
+  const {data} = await nextServer.get(`${process.env.NEXT_PUBLIC_API_URL}/api/profile/saved-stories`, {
       params: {
         page:1,
         perPage:6,
