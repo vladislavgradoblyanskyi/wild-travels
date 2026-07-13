@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import StoriesGrid from '../../StoriesPage/CategoriesFilter/StoriesGrid';
-import { Pagination } from '@/components/UI/pagination/pagination';
+import { Pagination } from '@/components/ui/pagination/pagination'
 import { removeSavedArticle, GetSavedStories } from '@/lib/api/storyApi';
 import type { Story } from '@/types/story';
 import css from './StoriesList.module.css';
