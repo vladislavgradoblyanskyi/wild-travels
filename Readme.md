@@ -197,8 +197,8 @@ src/
 
 | Name                     | Role             | GitHub                                                                 |
 | ------------------------ | ---------------- | ---------------------------------------------------------------------- |
-| Yevhen Kondrashov        | **Team Leader**  | [@SCBProd](https://github.com/SCBProd)                                 |
-| Yevhenii Prygaro         | **Scrum Master** | [@EugenePrygaro](https://github.com/EugenePrygaro)                     |
+| Yevhen Kondrashov        | **Team Leader+dev**  | [@SCBProd](https://github.com/SCBProd)                                 |
+| Yevhenii Prygaro         | **Scrum Master+dev** | [@EugenePrygaro](https://github.com/EugenePrygaro)                     |
 | Vladyslav Harkusha       | **Developer**    | [@RavemanThc](https://github.com/RavemanThc)                           |
 | Dmytro Muliar            | **Developer**    | [@Dimonik7772](https://github.com/Dimonik7772)                         |
 | Ihor Kuzmenko            | **Developer**    | [@IhorKuzmenko](https://github.com/IhorKuzmenko)                       |

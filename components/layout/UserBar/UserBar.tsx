@@ -6,6 +6,7 @@ import { logout } from '@/lib/api/clientApi';
 import { useAuthStore } from '@/lib/store/useAuthStore';
 import { toast } from 'react-hot-toast';
 import css from './userBar.module.css';
+import Link from 'next/link';
 
 type UserBarProps = {
   user?: {
@@ -77,10 +78,9 @@ export default function UserBar({ user }: UserBarProps) {
       setIsLoggingOut(false);
     }
   };
-
   return (
     <div className={css.wrapper}>
-      <div className={css.profileInfo}>
+      <Link href={'/profile'} className={css.profileInfo}>
         <Image
           src={userAvatar}
           alt="Аватар"
@@ -89,8 +89,8 @@ export default function UserBar({ user }: UserBarProps) {
           className={css.avatar}
           unoptimized
         />
-        <span className={css.name}>{userName}</span>
-      </div>
+        <span className={(css.name, css.navLink)}>{userName}</span>
+      </Link>
 
       <div className={css.divider}></div>
 

@@ -234,8 +234,11 @@ export const removeSavedArticle = async (storyId: string) => {
   return data;
 };
 
-export const GetSavedStories = async(page:number,perPage:number) =>{
-  const {data} = await nextServer.get('/api/profile/saved-stories', {
+export const getSavedStories = async (
+  page: number,
+  perPage: number,
+): Promise<StoriesResponse> =>{
+  const {data} = await nextServer.get<StoriesResponse>('/api/profile/saved-stories', {
       params: {
         page,
         perPage,

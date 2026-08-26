@@ -23,7 +23,7 @@ export const getMe = async (): Promise<User> => {
         const retryResponse = await nextServer.get<User>('/api/profile/me');
 
         return retryResponse.data;
-      } catch (refreshError) {
+      } catch  {
         throw new Error('Сесія закінчилася. Увійдіть знову.');
       }
     }

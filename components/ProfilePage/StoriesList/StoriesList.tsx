@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import StoriesGrid from '../../StoriesPage/CategoriesFilter/StoriesGrid';
 import { Pagination } from '@/components/ui/pagination/pagination';
-import { removeSavedArticle, GetSavedStories } from '@/lib/api/storyApi';
+import { removeSavedArticle, getSavedStories } from '@/lib/api/storyApi';
 import type { Story } from '@/types/story';
 import css from './StoriesList.module.css';
 
@@ -41,7 +41,7 @@ export default function StoriesPage({ stories }: Props) {
     try {
       const nextPage = page + 1;
 
-      const { data } = await GetSavedStories(nextPage, perPage);
+      const { data } = await getSavedStories(nextPage, perPage);
 
       setCurrentStories((prev) => [...prev, ...data]);
       setPage(nextPage);
