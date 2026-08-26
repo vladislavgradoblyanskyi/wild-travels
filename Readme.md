@@ -195,19 +195,21 @@ src/
 
 # Team
 
-| Name                     | Role             | GitHub                                                                 |
-| ------------------------ | ---------------- | ---------------------------------------------------------------------- |
+| Name                     | Role                 | GitHub                                                                 |
+| ------------------------ | -------------------- | ---------------------------------------------------------------------- |
 | Yevhen Kondrashov        | **Team Leader+dev**  | [@SCBProd](https://github.com/SCBProd)                                 |
 | Yevhenii Prygaro         | **Scrum Master+dev** | [@EugenePrygaro](https://github.com/EugenePrygaro)                     |
-| Vladyslav Harkusha       | **Developer**    | [@RavemanThc](https://github.com/RavemanThc)                           |
-| Dmytro Muliar            | **Developer**    | [@Dimonik7772](https://github.com/Dimonik7772)                         |
-| Ihor Kuzmenko            | **Developer**    | [@IhorKuzmenko](https://github.com/IhorKuzmenko)                       |
-| Anastasiia Paslavska     | **Developer**    | [@Nastyyyyya](https://github.com/Nastyyyyya)                           |
-| Evgeny Polyakov          | **Developer**    | [@Yevhen-Polyakov](https://github.com/Yevhen-Polyakov)                 |
-| Vladislav Gradoblyanskyi | **Developer**    | [@vladislavgradoblyanskyi](https://github.com/vladislavgradoblyanskyi) |
-| Den Yaseniuk             | **Developer**    | [@luxqxqm](https://github.com/luxqxqm)                                 |
-| Galyna Kud               | **Developer**    | [@Galyna-kud](https://github.com/Galyna-kud)                           |
-| Dariia                   | **Developer**    | [@ccnvxii](https://github.com/ccnvxii)                                 |
+| Vladyslav Harkusha       | **Developer**        | [@RavemanThc](https://github.com/RavemanThc)                           |
+| Dmytro Muliar            | **Developer**        | [@Dimonik7772](https://github.com/Dimonik7772)                         |
+| Ihor Kuzmenko            | **Developer**        | [@IhorKuzmenko](https://github.com/IhorKuzmenko)                       |
+| Dmytro Kartashov         | **Developer**        | [@dmitry-dmitry7](https://github.com/dmitry-dmitry7)                   |
+| Anastasiia Paslavska     | **Developer**        | [@Nastyyyyya](https://github.com/Nastyyyyya)                           |
+| Evgeny Polyakov          | **Developer**        | [@Yevhen-Polyakov](https://github.com/Yevhen-Polyakov)                 |
+| Vladislav Gradoblyanskyi | **Developer**        | [@vladislavgradoblyanskyi](https://github.com/vladislavgradoblyanskyi) |
+| Den Yaseniuk             | **Developer**        | [@luxqxqm](https://github.com/luxqxqm)                                 |
+| Galyna Kud               | **Developer**        | [@Galyna-kud](https://github.com/Galyna-kud)                           |
+| Dariia Rossokha          | **Developer**        | [@ccnvxii](https://github.com/ccnvxii)                                 |
+| Tkachenko Viktoriia      | **Developer**        | [@viktoriiatkachenko](https://github.com/viktoriiatkachenko)           |
 
 # Contributors
 

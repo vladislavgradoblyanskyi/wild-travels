@@ -18,8 +18,12 @@ const initialValues: UserLogin = {
 };
 
 const loginValidationSchema = Yup.object().shape({
-  email: Yup.string().email('Невірний формат пошти').required(),
-  password: Yup.string().min(8).required(),
+  email: Yup.string()
+    .email('Введіть коректну електронну пошту')
+    .required("Електронна пошта є обов'язковою"),
+  password: Yup.string()
+    .min(8, 'Пароль має містити щонайменше 8 символів')
+    .required("Пароль є обов'язковим"),
 });
 
 export default function LoginForm() {

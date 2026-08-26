@@ -1,3 +1,3 @@
-export default function Page() {
-  return <div>Profile</div>
+export default function EditProfilePage(){
+  return <>Profile Edit</>
 }

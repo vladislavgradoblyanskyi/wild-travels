@@ -218,7 +218,13 @@ export default function Header() {
                     </Link>
                   </div>
                   <div className={css.burgerUserProfileCentered}>
-                    <UserBar user={user} />
+                    <Link
+                      href="/profile"
+                      onClick={closeBurger}
+                      className={css.burgerProfileLink}
+                    >
+                      <UserBar user={user} />
+                    </Link>
                   </div>
                 </>
               )}

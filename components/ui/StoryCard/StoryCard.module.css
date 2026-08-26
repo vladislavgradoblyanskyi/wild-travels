@@ -58,6 +58,12 @@
   margin-top: auto;
 }
 
+.iconBtnActive {
+  background-color: #1b391b;
+  color: #fff;
+  border-color: #1b391b;
+}
+
 .infoBtn {
   flex: 1;
   min-width: 0;

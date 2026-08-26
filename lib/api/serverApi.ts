@@ -53,8 +53,8 @@ export const GetOwnStoriesServer = async ():Promise<OwnStories> => {
   });
   const enrichedStories = await enrichStoriesWithOwners(data.stories);
     return {
-    ...data,
-    data: enrichedStories,
+      ...data,
+  data: enrichedStories,
   };
 };
 

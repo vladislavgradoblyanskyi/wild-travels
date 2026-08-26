@@ -1,12 +1,22 @@
 'use client';
 
-import { useEffect, useMemo, useRef } from 'react';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQueryClient,
+  InfiniteData,
+} from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
+
 import StoriesGrid from '@/components/StoriesPage/CategoriesFilter/StoriesGrid';
 import { Pagination } from '@/components/ui/pagination/pagination';
-import type { Story } from '@/types/story';
-import type { StoriesResponse } from '@/types/story';
+import ErrorWhileSavingModal from '@/components/ui/ErrorWhileSavingModal/ErrorWhileSavingModal';
+
+import { useAuthStore } from '@/lib/store/useAuthStore';
+import { addSavedArticle, removeSavedArticle } from '@/lib/api/storyApi';
+
+import type { Story, StoriesResponse } from '@/types/story';
 import styles from './TravellersStories.module.css';
 
 export default function TravellersStories({
@@ -18,6 +28,15 @@ export default function TravellersStories({
 }) {
   const topRef = useRef<HTMLDivElement>(null);
   const prevStoriesLengthRef = useRef(0);
+  const queryClient = useQueryClient();
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const [showModal, setShowModal] = useState(false);
+
+  const queryKey = useMemo(
+    () => (ownerId ? ['stories', 'author', ownerId] : ['stories', 'all']),
+    [ownerId],
+  );
 
   const {
     data,
@@ -27,7 +46,7 @@ export default function TravellersStories({
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery<StoriesResponse>({
-    queryKey: ownerId ? ['stories', 'author', ownerId] : ['stories', 'all'],
+    queryKey,
     queryFn: async ({ pageParam }) => {
       const url = ownerId
         ? `/api/travellers/${ownerId}/stories?page=${pageParam}&perPage=${perPage}`
@@ -52,6 +71,80 @@ export default function TravellersStories({
     return Array.from(uniqueStories.values()) as unknown as Story[];
   }, [data]);
 
+  const savedStoryIds = useMemo(() => {
+    return new Set(
+      stories.filter((story) => story.isSaved).map((story) => story._id),
+    );
+  }, [stories]);
+
+  const toggleSaveMutation = useMutation({
+    mutationFn: async ({ id, isSaved }: { id: string; isSaved: boolean }) => {
+      if (isSaved) {
+        return removeSavedArticle(id);
+      } else {
+        return addSavedArticle(id);
+      }
+    },
+    onMutate: async ({ id, isSaved }) => {
+      await queryClient.cancelQueries({ queryKey });
+
+      const previousData =
+        queryClient.getQueryData<InfiniteData<StoriesResponse>>(queryKey);
+
+      queryClient.setQueryData<InfiniteData<StoriesResponse>>(
+        queryKey,
+        (old) => {
+          if (!old) return old;
+          return {
+            ...old,
+            pages: old.pages.map((page) => ({
+              ...page,
+              data: page.data.map((story: Story) =>
+                story._id === id
+                  ? {
+                      ...story,
+                      isSaved: !isSaved,
+                      savedCount: story.savedCount + (isSaved ? -1 : 1),
+                    }
+                  : story,
+              ),
+            })),
+          };
+        },
+      );
+
+      return { previousData };
+    },
+    onError: (_err, _variables, context) => {
+      if (context?.previousData) {
+        queryClient.setQueryData(queryKey, context.previousData);
+      }
+      toast.error('Не вдалося змінити статус збереження');
+    },
+    onSuccess: (_, variables) => {
+      toast.success(
+        variables.isSaved
+          ? 'Історію видалено зі збережених'
+          : 'Історію збережено',
+      );
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey });
+    },
+  });
+
+  const handleSave = (id: string) => {
+    if (!isAuthenticated) {
+      setShowModal(true);
+      return;
+    }
+
+    const story = stories.find((s) => s._id === id);
+    if (!story) return;
+
+    toggleSaveMutation.mutate({ id, isSaved: !!story.isSaved });
+  };
+
   useEffect(() => {
     if (
       stories.length > prevStoriesLengthRef.current &&
@@ -70,26 +163,26 @@ export default function TravellersStories({
     }
   }, [isError, error]);
 
-  const handleLoadMore = () => {
-    fetchNextPage();
-  };
-
   return (
     <div className={styles.wrapper}>
       <div ref={topRef} />
 
       <StoriesGrid
         stories={stories}
-        savedStoryIds={new Set()}
-        onSave={() => {}}
+        savedStoryIds={savedStoryIds}
+        onSave={handleSave}
       />
 
       <Pagination
         isVisible={!!hasNextPage}
         isLoading={isFetchingNextPage}
-        onClick={handleLoadMore}
+        onClick={fetchNextPage}
         className={styles.pagination}
       />
+
+      {showModal && (
+        <ErrorWhileSavingModal onClose={() => setShowModal(false)} />
+      )}
     </div>
   );
 }

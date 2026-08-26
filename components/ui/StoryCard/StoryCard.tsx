@@ -38,7 +38,7 @@ export default function StoryCard({
   const router = useRouter();
   const metaPrimary = getMetaPrimary(story);
   const saveLabel = isSaved ? 'Збережено' : 'Зберегти';
-
+  console.log(styles.iconBtnActive);
   return (
     <article className={styles.card}>
       <div className={styles.imageWrapper}>
@@ -84,7 +84,9 @@ export default function StoryCard({
           <Button
             type="button"
             variant="secondary"
-            className={`${styles.iconBtn} ${isSaved ? styles.iconBtnActive : ''}`}
+            className={`${styles.iconBtn} ${
+              isSaved ? styles.iconBtnActive : ''
+            }`}
             onClick={() => onSave?.(story._id)}
             aria-label={saveLabel}
             title={saveLabel}

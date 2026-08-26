@@ -1,7 +1,7 @@
 import TravellerPublicProfile from '@/components/TravellerPage/TravellerPublicProfile/TravellerPublicProfile';
 import { Metadata } from 'next';
 import ProfileTabs from '@/components/ProfilePage/ProfileTabs/ProfileTabs';
-import { GetMeServer } from '@/lib/api/serverApi';
+import { GetMeServer, GetOwnStoriesServer } from '@/lib/api/serverApi';
 export async function generateMetadata(): Promise<Metadata> {
   const user = await GetMeServer();
 
@@ -72,11 +72,20 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Profile() {
-  const user = await GetMeServer();
-  console.log(user);
+  const [user, ownStories] = await Promise.all([
+    GetMeServer(),
+    GetOwnStoriesServer(),
+  ]);
+
   return (
     <>
-      <TravellerPublicProfile traveller={user} />
+      <TravellerPublicProfile
+        totalArticles={ownStories.totalItems}
+        traveller={{
+          ...user,
+          articlesAmount: ownStories.totalItems,
+        }}
+      />
       <ProfileTabs />
     </>
   );

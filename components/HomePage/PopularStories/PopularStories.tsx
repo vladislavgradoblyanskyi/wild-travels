@@ -1,25 +1,27 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { SwiperOptions } from 'swiper/types';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
-
-import { getPopularStories, saveStory, unsaveStory } from '@/lib/api/clientApi';
+import { getPopularStories } from '@/lib/api/clientApi';
 import { useAuthStore } from '@/lib/store/useAuthStore';
-import StoryCard from '@/components/ui/StoryCard/StoryCard';
-
 import { Button } from '@/components/ui/buttons/btn';
 import { PageTitle } from '@/components/ui/PageTitle/PageTitle';
 import LoaderComponent from '@/components/Loader/Loader';
-
+import styles from './PopularStories.module.css';
+import ErrorWhileSavingModal from '@/components/ui/ErrorWhileSavingModal/ErrorWhileSavingModal';
+import StoryCard from '@/components/ui/StoryCard/StoryCard';
+import {
+  addSavedArticle,
+  removeSavedArticle,
+  getSavedStories,
+} from '@/lib/api/storyApi';
 import 'swiper/css';
 import 'swiper/css/navigation';
-
-import styles from './PopularStories.module.css';
 
 const swiperOptions = {
   modules: [Navigation],
@@ -47,6 +49,8 @@ const swiperOptions = {
 
 export default function PopularStories() {
   const router = useRouter();
+  const queryClient = useQueryClient();
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const [savedOverrides, setSavedOverrides] = useState<Record<string, boolean>>(
     {},
@@ -56,6 +60,18 @@ export default function PopularStories() {
     queryKey: ['popular-stories'],
     queryFn: () => getPopularStories(6),
   });
+
+  const savedStoriesQuery = useQuery({
+    queryKey: ['saved-stories'],
+    queryFn: () => getSavedStories(1, 100),
+    enabled: isAuthenticated,
+  });
+
+  const savedStoryIds = useMemo(() => {
+    return new Set(
+      savedStoriesQuery.data?.data.map((story) => story._id) ?? [],
+    );
+  }, [savedStoriesQuery.data]);
 
   useEffect(() => {
     if (isError) {
@@ -68,29 +84,34 @@ export default function PopularStories() {
     }
   }, [isError, error]);
 
-  const isStorySaved = (storyId: string, defaultSaved: boolean) =>
-    savedOverrides[storyId] ?? defaultSaved;
+  const isStorySaved = (storyId: string) =>
+    savedOverrides[storyId] ?? savedStoryIds.has(storyId);
 
   const handleSave = async (storyId: string) => {
     if (!isAuthenticated) {
-      toast.error('Увійдіть, щоб зберігати статті');
+      setIsAuthModalOpen(true);
       return;
     }
 
-    const story = data?.data.find((item) => item._id === storyId);
-    const isSaved = isStorySaved(storyId, story?.isSaved ?? false);
+    const isSaved = isStorySaved(storyId);
 
     try {
       if (isSaved) {
-        await unsaveStory(storyId);
+        await removeSavedArticle(storyId);
       } else {
-        await saveStory(storyId);
+        await addSavedArticle(storyId);
       }
 
-      setSavedOverrides((prev) => ({ ...prev, [storyId]: !isSaved }));
+      setSavedOverrides((prev) => ({
+        ...prev,
+        [storyId]: !isSaved,
+      }));
+
+      await savedStoriesQuery.refetch();
     } catch (err) {
       const message =
         err instanceof Error ? err.message : 'Не вдалося зберегти статтю';
+
       toast.error(message);
     }
   };
@@ -100,7 +121,6 @@ export default function PopularStories() {
   const stories = data?.data ?? [];
 
   if (!stories.length) return null;
-
   return (
     <section className={styles.section}>
       <div className="container">
@@ -126,7 +146,7 @@ export default function PopularStories() {
                 <StoryCard
                   story={story}
                   isPriority={index === 0}
-                  isSaved={isStorySaved(story._id, story.isSaved)}
+                  isSaved={isStorySaved(story._id)}
                   onSave={handleSave}
                 />
               </SwiperSlide>
@@ -164,6 +184,9 @@ export default function PopularStories() {
             Всі статті
           </Button>
         </div>
+        {isAuthModalOpen && (
+          <ErrorWhileSavingModal onClose={() => setIsAuthModalOpen(false)} />
+        )}
       </div>
     </section>
   );

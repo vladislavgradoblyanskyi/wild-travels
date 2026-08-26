@@ -19,15 +19,17 @@ import { PageTitle } from '@/components/ui/PageTitle/PageTitle';
 import LoaderComponent from '@/components/Loader/Loader';
 import MessageNoStories from '@/components/ui/MessageNoStories/MessageNoStories';
 import StoriesCategories from './CategoriesFilter/StoriesCategories';
-import StoriesGrid from './CategoriesFilter/StoriesGrid';
 import { useAuthStore } from '@/lib/store/useAuthStore';
 import type { StoriesResponse } from '@/types/story';
 import styles from './StoriesPage.module.css';
+import StoriesGrid from './CategoriesFilter/StoriesGrid';
+import ErrorWhileSavingModal from '../ui/ErrorWhileSavingModal/ErrorWhileSavingModal';
 
 const STORIES_PER_PAGE = 9;
 
 export default function StoriesPage() {
   const [activeCategory, setActiveCategory] = useState('');
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const queryClient = useQueryClient();
 
@@ -100,6 +102,23 @@ export default function StoriesPage() {
   }, [storiesQuery.data]);
 
   useEffect(() => {
+    console.log('Pages:', storiesQuery.data?.pages.length);
+
+    storiesQuery.data?.pages.forEach((page) => {
+      console.log(`Page ${page.page}:`, page.data.length, 'stories');
+    });
+
+    console.log(
+      'Merged:',
+      storiesQuery.data?.pages.flatMap((p) => p.data).length,
+    );
+
+    console.log('Rendered:', stories.length);
+
+    console.log('Backend totalItems:', storiesQuery.data?.pages[0]?.totalItems);
+  }, [storiesQuery.data, stories]);
+
+  useEffect(() => {
     if (storiesQuery.isError) {
       toast.error(
         storiesQuery.error.message || 'Не вдалося завантажити історії',
@@ -117,7 +136,7 @@ export default function StoriesPage() {
 
   const handleSave = async (storyId: string) => {
     if (!isAuthenticated) {
-      toast.error('Увійдіть, щоб зберігати історії');
+      setIsErrorModalOpen(true);
       return;
     }
 
@@ -193,6 +212,9 @@ export default function StoriesPage() {
             />
           )}
         </div>
+        {isErrorModalOpen && (
+          <ErrorWhileSavingModal onClose={() => setIsErrorModalOpen(false)} />
+        )}
       </div>
     </section>
   );

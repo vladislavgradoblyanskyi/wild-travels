@@ -15,7 +15,7 @@ export const PageTitle = ({
   id,
 }: PageTitleProps) => {
   return (
-    <Tag id={id} className={`${styles.title} ${styles[Tag]} ${styles.center} ${className}`}>
+    <Tag id={id} className={`${styles.title} ${styles[Tag]} ${className}`}>
       {children}
     </Tag>
   );

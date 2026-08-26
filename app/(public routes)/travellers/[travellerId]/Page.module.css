@@ -1,8 +1,12 @@
 .pageContainer {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 440px);
+  min-height: calc(100dvh - 440px);
 }
 
 .messageWrapper {
+  flex-grow: 1;
   margin-bottom: 64px;
 }
 
@@ -25,14 +29,24 @@
   text-align: center;
 }
 
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
+  .pageContainer {
+    min-height: calc(100vh - 330px);
+    min-height: calc(100dvh - 330px);
+  }
+
   .title {
     font-size: 44px;
     text-align: left;
   }
 }
 
-@media only screen and (min-width: 1140px) {
+@media (min-width: 1440px) {
+  .pageContainer {
+    min-height: calc(100vh - 364px);
+    min-height: calc(100dvh - 364px);
+  }
+
   .title {
     font-size: 52px;
   }
